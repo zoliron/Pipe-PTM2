@@ -53,7 +53,7 @@ public class MyServer implements Server {
 
     public static void main(String[] args) throws Exception {
         ClientHandler ch = new MyCHandler();
-        Server server = new MyServer(8080, ch);
+        Server server = new MyServer(6400, ch);
         server.start();
     }
 
