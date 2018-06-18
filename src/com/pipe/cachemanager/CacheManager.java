@@ -1,7 +1,9 @@
 package com.pipe.cachemanager;
 
+import java.io.IOException;
+
 public interface CacheManager {
-    void save(String newProblem);
+    void save(String newProblem) throws IOException, ClassNotFoundException;
 
     void load();
 }

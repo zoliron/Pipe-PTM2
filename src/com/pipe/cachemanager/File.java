@@ -3,24 +3,20 @@ package com.pipe.cachemanager;
 import java.io.*;
 
 public class File implements CacheManager {
-    private String newProblem;
-
-    public File(String newProblem) {
-        this.newProblem = newProblem;
-    }
+    private String problem;
 
     public static class Problem implements Serializable {
         public String maze = null;
     }
 
     @Override
-    public void save(String newProblem) {
+    public void save(String newProblem) throws IOException, ClassNotFoundException {
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("out.txt"));
 
-        Problem newProblem = new Problem();
-        newProblem.maze = "Test";
+        Problem saveProblem = new Problem();
+        saveProblem.maze = newProblem;
 
-        objectOutputStream.writeObject(newProblem);
+        objectOutputStream.writeObject(saveProblem);
         objectOutputStream.close();
 
 
@@ -35,8 +31,14 @@ public class File implements CacheManager {
 
     @Override
     public void load() {
-
     }
+
+
+    public static void main(String[] args) throws Exception {
+        File newFile = new File();
+        newFile.save("newTest");
+    }
+}
 
 
 
