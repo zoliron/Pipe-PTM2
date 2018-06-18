@@ -1,4 +1,4 @@
-package com.pipe.client;
+package com.pipe.tmp;
 
 import java.io.BufferedReader;
 import java.io.IOException;

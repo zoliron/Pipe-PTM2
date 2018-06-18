@@ -1,63 +1,78 @@
 package com.pipe.server;
 
 import com.pipe.client.ClientHandler;
-import com.pipe.client.MyCHandler;
+import com.pipe.client.PrintHandler;
 
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
 
 
-public class MyServer implements Server {
-    private int port;
-    private ClientHandler ch;
-    private volatile boolean stop;
+
+/**
+ * The {@link Server} implementation.
+ *
+ * @author Ronen Zolicha
+ */
+public class MyServer implements Server{
 
 
-    public MyServer(int port, ClientHandler ch) {
-        this.port = port;
-        this.ch = ch;
-        this.stop = false;
-    }
 
-    @Override
-    public void start() throws Exception {
-        runServer();
-    }
-
-    @Override
-    public void stop() {
-        stop = true;
-    }
-
-    private void runServer() throws Exception {
-        ServerSocket listener = new ServerSocket(port);
-//        listener.setSoTimeout(1000);
-
-        while (!stop) {
-            try {
-                Socket socket = listener.accept();
-
-                ch.handleClient(socket.getInputStream(), socket.getOutputStream());
-
-                socket.getInputStream().close();
-                socket.getOutputStream().close();
-                socket.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        listener.close();
-    }
+	/**
+	 * The {@link ClientHandler}.
+	 */
+	private ClientHandler clientHandler;
 
 
-    public static void main(String[] args) throws Exception {
-        ClientHandler ch = new MyCHandler();
-        Server server = new MyServer(6400, ch);
-        server.start();
-    }
+
+	/**
+	 * Indicates whether the server is stopped.
+	 */
+	private volatile boolean stop;
+
+
+
+	@Override
+	public void start(ClientHandler clientHandler) throws Exception{
+		this.clientHandler = clientHandler;
+		this.stop = false;
+
+		runServer();
+	}
+
+
+
+	@Override
+	public void stop(){
+		this.clientHandler = null;
+		this.stop = true;
+	}
+
+
+
+	/**
+	 * Run & listen on the server port.
+	 */
+	private void runServer() throws Exception{
+		ServerSocket listener = new ServerSocket(6400);
+
+		System.out.println("Waiting for clients on port 6400");
+		while (!stop){
+			try{
+				Socket socket = listener.accept();
+
+				clientHandler.handleClient(socket.getInputStream(), socket.getOutputStream());
+
+				socket.getInputStream().close();
+				socket.getOutputStream().close();
+				socket.close();
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+		}
+
+		listener.close();
+	}
+
 
 
 }

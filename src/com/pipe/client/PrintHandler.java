@@ -5,7 +5,7 @@ import com.pipe.cachemanager.File;
 
 import java.io.*;
 
-public class MyCHandler implements ClientHandler {
+public class PrintHandler implements ClientHandler {
 
     @Override
     public void handleClient(InputStream inFromClient, OutputStream outToClient) {
