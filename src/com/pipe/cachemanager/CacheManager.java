@@ -3,7 +3,7 @@ package com.pipe.cachemanager;
 import java.io.IOException;
 
 public interface CacheManager {
-    void save(String newProblem) throws IOException, ClassNotFoundException;
+    void save(String newProblem) throws IOException;
 
-    void load();
+    String load() throws IOException, ClassNotFoundException;
 }
