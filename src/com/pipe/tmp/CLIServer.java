@@ -1,6 +1,5 @@
 package com.pipe.tmp;
 
-import com.pipe.client.PrintHandler;
 import com.pipe.server.MyServer;
 import com.pipe.server.Server;
 

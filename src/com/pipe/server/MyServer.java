@@ -1,7 +1,6 @@
 package com.pipe.server;
 
 import com.pipe.client.ClientHandler;
-import com.pipe.client.PrintHandler;
 
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -62,9 +61,9 @@ public class MyServer implements Server{
 
 				clientHandler.handleClient(socket.getInputStream(), socket.getOutputStream());
 
-				socket.getInputStream().close();
-				socket.getOutputStream().close();
-				socket.close();
+//				socket.getInputStream().close();
+//				socket.getOutputStream().close();
+//				socket.close();
 			} catch (Exception e){
 				e.printStackTrace();
 			}
