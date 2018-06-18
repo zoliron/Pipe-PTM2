@@ -28,11 +28,23 @@ public class IPipeCell extends DegreesPipeCell{
 			// '|' case
 			case 0:
 			case 180:
+				if (isTop(fromPoint))
+					return getBottom();
+
+				if (isBottom(fromPoint))
+					return getTop();
+
 				return null;
 
 			// '-' case
 			case 90:
 			case 270:
+				if (isLeft(fromPoint))
+					return getRight();
+
+				if (isRight(fromPoint))
+					return getLeft();
+
 				return null;
 
 			default:

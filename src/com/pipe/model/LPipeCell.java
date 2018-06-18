@@ -26,17 +26,40 @@ public class LPipeCell extends DegreesPipeCell{
 	public Point walkThrough(Point fromPoint){
 		switch (getDegrees()){
 			case 0: // 'L' case
+				if (isTop(fromPoint))
+					return getRight();
+
+				if (isRight(fromPoint))
+					return getTop();
+
 				return null;
 
 			case 90: // 'F' case
+				if (isRight(fromPoint))
+					return getBottom();
+
+				if (isBottom(fromPoint))
+					return getRight();
+
 				return null;
 
 			case 180: // '7' case
+				if (isLeft(fromPoint))
+					return getBottom();
+
+				if (isBottom(fromPoint))
+					return getLeft();
+
 				return null;
 
 			case 270: // 'J' case
-				return null;
+				if (isTop(fromPoint))
+					return getLeft();
 
+				if (isLeft(fromPoint))
+					return getTop();
+
+				return null;
 			default:
 				throw new IllegalStateException("Unsupported degrees: " + getDegrees());
 		}
