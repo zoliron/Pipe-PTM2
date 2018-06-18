@@ -21,10 +21,12 @@ public class MyServer implements Server {
         this.stop = false;
     }
 
+    @Override
     public void start() throws Exception {
         runServer();
     }
 
+    @Override
     public void stop() {
         stop = true;
     }
@@ -56,7 +58,6 @@ public class MyServer implements Server {
         Server server = new MyServer(6400, ch);
         server.start();
     }
-
 
 
 }
