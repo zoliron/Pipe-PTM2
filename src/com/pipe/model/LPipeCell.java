@@ -23,10 +23,17 @@ public class LPipeCell extends DegreesPipeCell{
 
 
 	@Override
+	public final void rotate(){
+		this.degrees = (degrees + 90) % 360;
+	}
+
+
+
+	@Override
 	public boolean isConnectedWith(PipeCell cell){
 		Point point = cell.getCoordinates();
 
-		switch (getDegrees()){
+		switch (degrees){
 			case 0: // 'L' case
 				return isBottomOf(point) || isLeftOf(point);
 
@@ -40,7 +47,7 @@ public class LPipeCell extends DegreesPipeCell{
 				return isBottomOf(point) || isRightOf(point);
 
 			default:
-				throw new IllegalStateException("Unsupported degrees: " + getDegrees());
+				throw new IllegalStateException("Unsupported degrees: " + degrees);
 		}
 	}
 
@@ -48,7 +55,7 @@ public class LPipeCell extends DegreesPipeCell{
 
 	@Override
 	public String toString(){
-		switch (getDegrees()){
+		switch (degrees){
 			case 0: // 'L' case
 				return "L";
 
@@ -62,7 +69,7 @@ public class LPipeCell extends DegreesPipeCell{
 				return "J";
 
 			default:
-				throw new IllegalStateException("Unsupported degrees: " + getDegrees());
+				throw new IllegalStateException("Unsupported degrees: " + degrees);
 		}
 	}
 
@@ -70,7 +77,7 @@ public class LPipeCell extends DegreesPipeCell{
 
 	@Override
 	public PipeCell deepCopy(){
-		return new LPipeCell(getCoordinates(), getDegrees());
+		return new LPipeCell(getCoordinates(), degrees);
 	}
 
 
