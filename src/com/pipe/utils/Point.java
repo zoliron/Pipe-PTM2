@@ -1,5 +1,9 @@
 package com.pipe.utils;
 
+import java.util.Objects;
+
+
+
 /**
  * Encapsulate 2D point.
  *
@@ -31,6 +35,23 @@ public class Point{
 		this.y = y;
 	}
 
+
+
+	@Override
+	public int hashCode(){
+		return Objects.hash(x, y);
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj){
+		if (!(obj instanceof Point))
+			return false;
+
+		Point other = (Point)obj;
+		return x == other.x && y == other.y;
+	}
 
 
 }

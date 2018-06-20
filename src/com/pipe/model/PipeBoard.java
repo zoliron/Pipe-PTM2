@@ -49,13 +49,13 @@ public class PipeBoard implements Cloneable{
 	 * Creates new deep copy {@link PipeBoard} from other board.
 	 */
 	public PipeBoard(PipeBoard other){
-		int rowCount = getRowCount();
-		int columnCount = getColumnCount();
+		int rowCount = other.getRowCount();
+		int columnCount = other.getColumnCount();
 
 		this.board = new PipeCell[rowCount][columnCount];
 		for (int y = 0; y < rowCount; y++)
 			for (int x = 0; x < columnCount; x++)
-				other.board[y][x] = board[y][x].deepCopy();
+				board[y][x] = other.board[y][x].deepCopy();
 
 		this.source = findSourceCell(board);
 		this.goal = findGoalCell(board);

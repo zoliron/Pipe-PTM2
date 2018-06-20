@@ -3,6 +3,10 @@ package com.pipe.tmp;
 import com.pipe.client.ClientHandler;
 import com.pipe.client.PipeBoardParser;
 import com.pipe.model.PipeBoard;
+import com.pipe.searchable.PipeSearchable;
+import com.pipe.searchable.PipeState;
+import com.pipe.searchable.State;
+import com.pipe.searcher.BFS;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -21,6 +25,18 @@ public class PrintHandler implements ClientHandler{
 
 			PipeBoard board = new PipeBoardParser().parse(rawBoard);
 			System.out.println(board);
+
+			PipeSearchable p = new PipeSearchable(board);
+
+			State<PipeState> g = new BFS<PipeState>().search(p);
+			System.out.println(g.getObj().board);
+
+//			List<State<PipeState>> states = p.getAllPossibleStates(p.getInitialState());
+//			for (State<PipeState> state : states){
+//				System.out.println("\n\n\n\n");
+//				System.out.println(state.getObj().board);
+//			}
+
 		} catch (Exception e){
 			e.printStackTrace();
 		}
