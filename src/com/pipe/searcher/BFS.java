@@ -44,6 +44,8 @@ public class BFS<T> implements Searcher<T>{
 			}
 		}
 
+		System.out.println();
+
 		return null;
 	}
 
