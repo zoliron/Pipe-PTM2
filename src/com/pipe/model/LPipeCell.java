@@ -23,43 +23,22 @@ public class LPipeCell extends DegreesPipeCell{
 
 
 	@Override
-	public Point walkThrough(Point fromPoint){
+	public boolean isConnectedWith(PipeCell cell){
+		Point point = cell.getCoordinates();
+
 		switch (getDegrees()){
 			case 0: // 'L' case
-				if (isTop(fromPoint))
-					return getRight();
-
-				if (isRight(fromPoint))
-					return getTop();
-
-				return null;
+				return isBottomOf(point) || isLeftOf(point);
 
 			case 90: // 'F' case
-				if (isRight(fromPoint))
-					return getBottom();
-
-				if (isBottom(fromPoint))
-					return getRight();
-
-				return null;
+				return isTopOf(point) || isLeftOf(point);
 
 			case 180: // '7' case
-				if (isLeft(fromPoint))
-					return getBottom();
-
-				if (isBottom(fromPoint))
-					return getLeft();
-
-				return null;
+				return isTopOf(point) || isRightOf(point);
 
 			case 270: // 'J' case
-				if (isTop(fromPoint))
-					return getLeft();
+				return isBottomOf(point) || isRightOf(point);
 
-				if (isLeft(fromPoint))
-					return getTop();
-
-				return null;
 			default:
 				throw new IllegalStateException("Unsupported degrees: " + getDegrees());
 		}

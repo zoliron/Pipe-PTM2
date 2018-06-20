@@ -2,6 +2,8 @@ package com.pipe.model;
 
 import com.pipe.utils.Point;
 
+import java.util.Objects;
+
 
 
 /**
@@ -77,7 +79,7 @@ public abstract class PipeCell{
 	/**
 	 * Walk through the given point.
 	 */
-	public abstract Point walkThrough(Point fromPoint);
+	public abstract boolean isConnectedWith(PipeCell cell);
 
 
 
@@ -91,7 +93,7 @@ public abstract class PipeCell{
 	/**
 	 * Returns whether the specified point it to top of the cell coordinates.
 	 */
-	public final boolean isTop(Point point){
+	public final boolean isTopOf(Point point){
 		return (coordinates.x == point.x) && (coordinates.y == point.y - 1);
 	}
 
@@ -109,7 +111,7 @@ public abstract class PipeCell{
 	/**
 	 * Returns whether the specified point it to bottom of the cell coordinates.
 	 */
-	public final boolean isBottom(Point point){
+	public final boolean isBottomOf(Point point){
 		return (coordinates.x == point.x) && (coordinates.y == point.y + 1);
 	}
 
@@ -127,7 +129,7 @@ public abstract class PipeCell{
 	/**
 	 * Returns whether the specified point it to left of the cell coordinates.
 	 */
-	public final boolean isLeft(Point point){
+	public final boolean isLeftOf(Point point){
 		return (coordinates.x == point.x - 1) && (coordinates.y == point.y);
 	}
 
@@ -145,7 +147,7 @@ public abstract class PipeCell{
 	/**
 	 * Returns whether the specified point it to right of the cell coordinates.
 	 */
-	public final boolean isRight(Point point){
+	public final boolean isRightOf(Point point){
 		return (coordinates.x == point.x + 1) && (coordinates.y == point.y);
 	}
 
@@ -162,7 +164,7 @@ public abstract class PipeCell{
 
 	@Override
 	public int hashCode(){
-		return toString().hashCode();
+		return Objects.hash(getClass(), coordinates);
 	}
 
 
@@ -172,7 +174,9 @@ public abstract class PipeCell{
 		if (!(obj instanceof PipeCell))
 			return false;
 
-		return toString().equals(obj.toString());
+		PipeCell other = (PipeCell)obj;
+		return Objects.equals(getClass(), obj.getClass())
+				&& Objects.equals(coordinates, other.coordinates);
 	}
 
 

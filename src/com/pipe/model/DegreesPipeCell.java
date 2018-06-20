@@ -2,6 +2,8 @@ package com.pipe.model;
 
 import com.pipe.utils.Point;
 
+import java.util.Objects;
+
 
 
 /**
@@ -51,6 +53,25 @@ public abstract class DegreesPipeCell extends PipeCell{
 	protected int getDegrees(){
 		return degrees;
 	}
+
+
+
+	@Override
+	public int hashCode(){
+		return Objects.hash(super.hashCode(), degrees);
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj){
+		if (!(obj instanceof DegreesPipeCell))
+			return false;
+
+		DegreesPipeCell other = (DegreesPipeCell)obj;
+		return super.equals(other) && (degrees == other.degrees);
+	}
+
 
 
 }

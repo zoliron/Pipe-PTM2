@@ -2,6 +2,9 @@ package com.pipe.model;
 
 import com.pipe.utils.Point;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 
 
 /**
@@ -143,7 +146,7 @@ public class PipeBoard implements Cloneable{
 
 	@Override
 	public int hashCode(){
-		return toString().hashCode();
+		return Arrays.deepHashCode(board);
 	}
 
 
@@ -153,7 +156,8 @@ public class PipeBoard implements Cloneable{
 		if (!(obj instanceof PipeBoard))
 			return false;
 
-		return toString().equals(obj.toString());
+		PipeBoard other = (PipeBoard)obj;
+		return Objects.deepEquals(board, other.board);
 	}
 
 

@@ -28,8 +28,12 @@ public class PrintHandler implements ClientHandler{
 
 			PipeSearchable p = new PipeSearchable(board);
 
+			System.out.println("\n\n");
+
 			State<PipeState> g = new BFS<PipeState>().search(p);
 			System.out.println(g.getObj().board);
+
+			p.isGoal(g);
 
 //			List<State<PipeState>> states = p.getAllPossibleStates(p.getInitialState());
 //			for (State<PipeState> state : states){

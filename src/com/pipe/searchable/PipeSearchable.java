@@ -5,8 +5,9 @@ import com.pipe.model.PipeCell;
 import com.pipe.utils.Point;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 
 
@@ -38,9 +39,7 @@ public class PipeSearchable implements Searchable<PipeState>{
 	public boolean isGoal(State<PipeState> state){
 		PipeState pipeState = state.getObj();
 
-		PipeCell cell = pipeState.board.get(pipeState.point);
-
-		return (cell != null) && cell.isGoal();
+		return isGoal(pipeState.board, new LinkedList<>(), pipeState.board.getSource().getCoordinates());
 	}
 
 
@@ -48,7 +47,7 @@ public class PipeSearchable implements Searchable<PipeState>{
 	/**
 	 * Returns {@code true} if there is a pipes that lead to the goal cell, otherwise returns {@code false}.
 	 */
-	private static boolean isGoal(PipeBoard board, Set<Point> visited, Point position){
+	private static boolean isGoal(PipeBoard board, Collection<Point> visited, Point position){
 		if (visited.contains(position))
 			return false;
 
@@ -69,16 +68,17 @@ public class PipeSearchable implements Searchable<PipeState>{
 	/**
 	 * Returns {@code true} if there is a pipes that lead to the goal cell through {@param toPoint}, otherwise returns {@code false}.
 	 */
-	private static boolean isGoal(PipeBoard board, Set<Point> visited, Point fromPoint, Point toPoint){
+	private static boolean isGoal(PipeBoard board, Collection<Point> visited, Point fromPoint, Point toPoint){
+		PipeCell fromCell = board.get(fromPoint);
 		PipeCell toCell = board.get(toPoint);
-		if (toCell == null)
+		if (fromCell == null || toCell == null)
 			return false;
 
-		Point destPoint = toCell.walkThrough(fromPoint);
-		if (destPoint == null)
+		boolean canMoveTo = fromCell.isConnectedWith(toCell) && toCell.isConnectedWith(fromCell);
+		if (!canMoveTo)
 			return false;
 
-		return isGoal(board, visited, destPoint);
+		return isGoal(board, visited, toPoint);
 	}
 
 

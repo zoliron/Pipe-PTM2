@@ -16,6 +16,8 @@ public class BFS<T> implements Searcher<T>{
 
 	@Override
 	public State<T> search(Searchable<T> searchable){
+		int n = 0;
+
 		Queue<State<T>> queue = new LinkedList<>();
 		Set<State<T>> visited = new HashSet<>();
 
@@ -28,6 +30,8 @@ public class BFS<T> implements Searcher<T>{
 
 			// Mark as visited.
 			visited.add(state);
+
+			System.out.print("\rsteps=" + (++n));
 
 			// Check if we are on the goal state.
 			if (searchable.isGoal(state))

@@ -30,8 +30,8 @@ public class GoalCell extends PipeCell{
 
 
 	@Override
-	public Point walkThrough(Point fromPoint){
-		return null;
+	public boolean isConnectedWith(PipeCell cell){
+		return true;
 	}
 
 

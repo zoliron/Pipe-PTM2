@@ -1,9 +1,13 @@
 package com.pipe.searchable;
 
+import java.util.Objects;
+
+
+
 /**
  * @author Yaniv Zolicha
  */
-public class State<T> implements Comparable<State<T>>{
+public class State<T>{
 
 
 
@@ -22,19 +26,11 @@ public class State<T> implements Comparable<State<T>>{
 
 
 	/**
-	 * The state length (path size).
-	 */
-	private int length;
-
-
-
-	/**
 	 * Creates new {@link State} with the specified object.
 	 */
 	public State(T obj){
 		this.obj = obj;
 		this.cameFrom = null;
-		this.length = 0;
 	}
 
 
@@ -62,30 +58,13 @@ public class State<T> implements Comparable<State<T>>{
 	 */
 	public void setCameFrom(State<T> cameFrom){
 		this.cameFrom = cameFrom;
-		this.length = calculateLength(this);
-	}
-
-
-
-	/**
-	 * Returns the state length (path size).
-	 */
-	public int getLength(){
-		return length;
-	}
-
-
-
-	@Override
-	public int compareTo(State<T> other){
-		return Integer.compare(length, other.length);
 	}
 
 
 
 	@Override
 	public int hashCode(){
-		return obj.hashCode();
+		return Objects.hash(obj, cameFrom);
 	}
 
 
@@ -96,18 +75,8 @@ public class State<T> implements Comparable<State<T>>{
 			return false;
 
 		State<?> other = (State<?>)obj;
-		return this.obj.equals(other.obj);
-	}
-
-
-
-	/**
-	 * Calculate the state length.
-	 */
-	private static int calculateLength(State<?> state){
-		return (state == null)
-				? 0
-				: state.length + 1;
+		return Objects.equals(obj, other.obj)
+				&& Objects.equals(cameFrom, other.cameFrom);
 	}
 
 
