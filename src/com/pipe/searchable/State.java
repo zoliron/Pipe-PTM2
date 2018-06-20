@@ -14,7 +14,7 @@ public class State<T>{
 	/**
 	 * The state object.
 	 */
-	private final T obj;
+	private final T stateObject;
 
 
 
@@ -28,8 +28,8 @@ public class State<T>{
 	/**
 	 * Creates new {@link State} with the specified object.
 	 */
-	public State(T obj){
-		this.obj = obj;
+	public State(T stateObject){
+		this.stateObject = stateObject;
 		this.cameFrom = null;
 	}
 
@@ -38,8 +38,8 @@ public class State<T>{
 	/**
 	 * Returns the state object.
 	 */
-	public T getObj(){
-		return obj;
+	public T getStateObject(){
+		return stateObject;
 	}
 
 
@@ -64,7 +64,7 @@ public class State<T>{
 
 	@Override
 	public int hashCode(){
-		return Objects.hash(obj, cameFrom);
+		return Objects.hashCode(stateObject);
 	}
 
 
@@ -75,8 +75,7 @@ public class State<T>{
 			return false;
 
 		State<?> other = (State<?>)obj;
-		return Objects.equals(obj, other.obj)
-				&& Objects.equals(cameFrom, other.cameFrom);
+		return Objects.equals(stateObject, other.stateObject);
 	}
 
 

@@ -31,7 +31,7 @@ public class PipeState{
 
 	@Override
 	public int hashCode(){
-		return Objects.hash(board, point);
+		return Objects.hash(board);
 	}
 
 
@@ -42,8 +42,7 @@ public class PipeState{
 			return false;
 
 		PipeState other = (PipeState)obj;
-		return Objects.equals(board, other.board)
-				&& Objects.equals(point, other.point);
+		return Objects.equals(board, other.board);
 	}
 
 

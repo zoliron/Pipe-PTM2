@@ -37,7 +37,7 @@ public class PipeSearchable implements Searchable<PipeState>{
 
 	@Override
 	public boolean isGoal(State<PipeState> state){
-		PipeState pipeState = state.getObj();
+		PipeState pipeState = state.getStateObject();
 
 		return isGoal(pipeState.board, new LinkedList<>(), pipeState.board.getSource().getCoordinates());
 	}
@@ -85,7 +85,7 @@ public class PipeSearchable implements Searchable<PipeState>{
 
 	@Override
 	public List<State<PipeState>> getAllPossibleStates(State<PipeState> state){
-		PipeBoard current = state.getObj().board;
+		PipeBoard current = state.getStateObject().board;
 		int rowCount = current.getRowCount();
 		int columnCount = current.getColumnCount();
 

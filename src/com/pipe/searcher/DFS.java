@@ -3,9 +3,7 @@ package com.pipe.searcher;
 import com.pipe.searchable.Searchable;
 import com.pipe.searchable.State;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 
 
@@ -18,35 +16,36 @@ public class DFS<T> implements Searcher<T>{
 
 	@Override
 	public State<T> search(Searchable<T> searchable){
-//		int n = 0;
-//
-//		Deque<State<T>> deque = new LinkedList<>();
-//		Set<State<T>> visited = new HashSet<>();
-//
-//		// Add the initial state.
-//		deque.addLast(searchable.getInitialState());
-//
-//		while (!deque.isEmpty()){
-//			// Poll the head.
-//			State<T> state = deque.removeLast();
-//
-//			// Mark as visited.
-//			visited.add(state);
-//
-//			System.out.print("\rsteps=" + (++n));
-//
-//			// Check if we are on the goal state.
-//			if (searchable.isGoal(state))
-//				return state;
-//
-//			List<State<T>> possibleStates = searchable.getAllPossibleStates(state);
-//			for (State<T> possibleState : possibleStates){
-//				if (!visited.contains(possibleState))
-//					deque.addLast(possibleState);
-//			}
-//		}
+		int n = 0;
 
-		return dfs(searchable, searchable.getInitialState(), new ArrayList<>());
+		Deque<State<T>> deque = new LinkedList<>();
+		Set<State<T>> visited = new HashSet<>();
+
+		// Add the initial state.
+		deque.addLast(searchable.getInitialState());
+
+		while (!deque.isEmpty()){
+			// Poll the head.
+			State<T> state = deque.removeLast();
+
+			// Mark as visited.
+			visited.add(state);
+
+			System.out.print("\rsteps=" + (++n));
+
+			// Check if we are on the goal state.
+			if (searchable.isGoal(state))
+				return state;
+
+			List<State<T>> possibleStates = searchable.getAllPossibleStates(state);
+			for (State<T> possibleState : possibleStates){
+				if (!visited.contains(possibleState))
+					deque.addLast(possibleState);
+			}
+		}
+
+		return null;
+//		return dfs(searchable, searchable.getInitialState(), new ArrayList<>());
 	}
 
 
