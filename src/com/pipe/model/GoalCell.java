@@ -30,13 +30,6 @@ public class GoalCell extends PipeCell{
 
 
 	@Override
-	public void rotate(){
-		// Do nothing.
-	}
-
-
-
-	@Override
 	public Point walkThrough(Point fromPoint){
 		return null;
 	}
@@ -46,6 +39,13 @@ public class GoalCell extends PipeCell{
 	@Override
 	public String toString(){
 		return "g";
+	}
+
+
+
+	@Override
+	public PipeCell deepCopy(){
+		return new GoalCell(getCoordinates());
 	}
 
 

@@ -23,13 +23,6 @@ public class EmptyCell extends PipeCell{
 
 
 	@Override
-	public void rotate(){
-		// Do nothing.
-	}
-
-
-
-	@Override
 	public Point walkThrough(Point fromPoint){
 		return null;
 	}
@@ -40,6 +33,14 @@ public class EmptyCell extends PipeCell{
 	public String toString(){
 		return " ";
 	}
+
+
+
+	@Override
+	public PipeCell deepCopy(){
+		return new EmptyCell(getCoordinates());
+	}
+
 
 
 }

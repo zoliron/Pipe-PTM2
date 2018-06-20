@@ -25,13 +25,6 @@ public class SourceCell extends PipeCell{
 
 
 	@Override
-	public void rotate(){
-		// Do nothing.
-	}
-
-
-
-	@Override
 	public Point walkThrough(Point fromPoint){
 		return null;
 	}
@@ -41,6 +34,13 @@ public class SourceCell extends PipeCell{
 	@Override
 	public String toString(){
 		return "s";
+	}
+
+
+
+	@Override
+	public PipeCell deepCopy(){
+		return new SourceCell(getCoordinates());
 	}
 
 

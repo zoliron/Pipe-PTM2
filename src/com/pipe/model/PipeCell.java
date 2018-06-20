@@ -57,9 +57,20 @@ public abstract class PipeCell{
 
 
 	/**
+	 * Returns {@code true} if the cell can be rotated, otherwise returns {@code false}.
+	 */
+	public boolean isRotateable(){
+		return false;
+	}
+
+
+
+	/**
 	 * Rotate the cell (clockwise).
 	 */
-	public abstract void rotate();
+	public void rotate(){
+		throw new UnsupportedOperationException("Unimplemented method!");
+	}
 
 
 
@@ -71,9 +82,16 @@ public abstract class PipeCell{
 
 
 	/**
+	 * Returns deep copy of this pipe cell.
+	 */
+	public abstract PipeCell deepCopy();
+
+
+
+	/**
 	 * Returns whether the specified point it to top of the cell coordinates.
 	 */
-	final boolean isTop(Point point){
+	public final boolean isTop(Point point){
 		return (coordinates.x == point.x) && (coordinates.y == point.y - 1);
 	}
 
@@ -82,7 +100,7 @@ public abstract class PipeCell{
 	/**
 	 * Returns the point to top of the cell coordinates.
 	 */
-	final Point getTop(){
+	public final Point getTop(){
 		return new Point(coordinates.x, coordinates.y - 1);
 	}
 
@@ -91,7 +109,7 @@ public abstract class PipeCell{
 	/**
 	 * Returns whether the specified point it to bottom of the cell coordinates.
 	 */
-	final boolean isBottom(Point point){
+	public final boolean isBottom(Point point){
 		return (coordinates.x == point.x) && (coordinates.y == point.y + 1);
 	}
 
@@ -100,7 +118,7 @@ public abstract class PipeCell{
 	/**
 	 * Returns the point to bottom of the cell coordinates.
 	 */
-	final Point getBottom(){
+	public final Point getBottom(){
 		return new Point(coordinates.x, coordinates.y + 1);
 	}
 
@@ -109,7 +127,7 @@ public abstract class PipeCell{
 	/**
 	 * Returns whether the specified point it to left of the cell coordinates.
 	 */
-	final boolean isLeft(Point point){
+	public final boolean isLeft(Point point){
 		return (coordinates.x == point.x - 1) && (coordinates.y == point.y);
 	}
 
@@ -118,7 +136,7 @@ public abstract class PipeCell{
 	/**
 	 * Returns the point to left of the cell coordinates.
 	 */
-	final Point getLeft(){
+	public final Point getLeft(){
 		return new Point(coordinates.x - 1, coordinates.y);
 	}
 
@@ -127,7 +145,7 @@ public abstract class PipeCell{
 	/**
 	 * Returns whether the specified point it to right of the cell coordinates.
 	 */
-	final boolean isRight(Point point){
+	public final boolean isRight(Point point){
 		return (coordinates.x == point.x + 1) && (coordinates.y == point.y);
 	}
 
@@ -136,8 +154,25 @@ public abstract class PipeCell{
 	/**
 	 * Returns the point to right of the cell coordinates.
 	 */
-	final Point getRight(){
+	public final Point getRight(){
 		return new Point(coordinates.x + 1, coordinates.y);
+	}
+
+
+
+	@Override
+	public int hashCode(){
+		return toString().hashCode();
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj){
+		if (!(obj instanceof PipeCell))
+			return false;
+
+		return toString().equals(obj.toString());
 	}
 
 

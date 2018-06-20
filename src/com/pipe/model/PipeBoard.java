@@ -1,5 +1,9 @@
 package com.pipe.model;
 
+import com.pipe.utils.Point;
+
+
+
 /**
  * Encapsulate the pipe game board.
  *
@@ -41,12 +45,36 @@ public class PipeBoard implements Cloneable{
 
 
 
+	/**
+	 * Creates new deep copy {@link PipeBoard} from other board.
+	 */
+	public PipeBoard(PipeBoard other){
+		int rowCount = getRowCount();
+		int columnCount = getColumnCount();
+
+		this.board = new PipeCell[rowCount][columnCount];
+		for (int y = 0; y < rowCount; y++)
+			for (int x = 0; x < columnCount; x++)
+				other.board[y][x] = board[y][x].deepCopy();
+
+		this.source = findSourceCell(board);
+		this.goal = findGoalCell(board);
+	}
+
+
+
+	/**
+	 * Returns the board row count.
+	 */
 	public int getRowCount(){
 		return board.length;
 	}
 
 
 
+	/**
+	 * Returns the board column count.
+	 */
 	public int getColumnCount(){
 		return board[0].length;
 	}
@@ -71,27 +99,25 @@ public class PipeBoard implements Cloneable{
 
 
 
-	public PipeCell get(int x, int y){
-		return board[y][x];
+	/**
+	 * Returns the {@link PipeCell} at the specified position.
+	 */
+	public PipeCell get(Point position){
+		return get(position.x, position.y);
 	}
 
 
 
-
-
 	/**
-	 * Clone the {@link PipeBoard} cells.
+	 * Returns the {@link PipeCell} at the specified position.
 	 */
-	public PipeCell[][] cloneBoardCells(){
-		int rowCount = getRowCount();
+	public PipeCell get(int x, int y){
 		int columnCount = getColumnCount();
+		int rowCount = getRowCount();
 
-		PipeCell[][] cloneBoard = new PipeCell[rowCount][columnCount];
-		for (int y = 0; y < rowCount; y++)
-			for (int x = 0; x < columnCount; x++)
-				cloneBoard[y][x] = board[y][x];
-
-		return cloneBoard;
+		return (0 <= x && x < columnCount && 0 <= y && y < rowCount)
+				? board[y][x]
+				: null;
 	}
 
 
@@ -111,6 +137,23 @@ public class PipeBoard implements Cloneable{
 		}
 
 		return sb.toString();
+	}
+
+
+
+	@Override
+	public int hashCode(){
+		return toString().hashCode();
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj){
+		if (!(obj instanceof PipeBoard))
+			return false;
+
+		return toString().equals(obj.toString());
 	}
 
 
@@ -140,7 +183,6 @@ public class PipeBoard implements Cloneable{
 
 		throw new IllegalStateException("Missing goal cell.");
 	}
-
 
 
 }

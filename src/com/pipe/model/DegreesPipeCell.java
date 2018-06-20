@@ -32,6 +32,13 @@ public abstract class DegreesPipeCell extends PipeCell{
 
 
 	@Override
+	public boolean isRotateable(){
+		return true;
+	}
+
+
+
+	@Override
 	public final void rotate(){
 		this.degrees = (degrees + 90) % 360;
 	}
@@ -44,7 +51,6 @@ public abstract class DegreesPipeCell extends PipeCell{
 	protected int getDegrees(){
 		return degrees;
 	}
-
 
 
 }

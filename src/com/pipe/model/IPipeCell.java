@@ -74,4 +74,10 @@ public class IPipeCell extends DegreesPipeCell{
 
 
 
+	@Override
+	public PipeCell deepCopy(){
+		return new IPipeCell(getCoordinates(), getDegrees());
+	}
+
+
 }
