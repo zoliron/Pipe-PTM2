@@ -31,7 +31,7 @@ public class PrintHandler implements ClientHandler{
 
 			System.out.println("\n\n");
 
-			State<PipeState> g = new DFS<PipeState>().search(p);
+			State<PipeState> g = new BFS<PipeState>().search(p);
 
 			System.out.println("\n\n");
 

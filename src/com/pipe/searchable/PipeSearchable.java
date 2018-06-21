@@ -12,7 +12,7 @@ import java.util.List;
 
 
 /**
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public class PipeSearchable implements Searchable<PipeState>{
 

@@ -8,7 +8,7 @@ import java.util.*;
 
 
 /**
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public class DFS<T> implements Searcher<T>{
 

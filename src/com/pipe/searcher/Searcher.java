@@ -12,7 +12,7 @@ public interface Searcher<T> {
 
     State<T> search(Searchable<T> searchable);
 
-    public Solution<T> search(Searchable<T> s);
-
-    public int getNumberOfNodesEvaluated();
+//    public Solution<T> search(Searchable<T> s);
+//
+//    public int getNumberOfNodesEvaluated();
 }

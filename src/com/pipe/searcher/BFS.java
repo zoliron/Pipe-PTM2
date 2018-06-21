@@ -8,7 +8,7 @@ import java.util.*;
 
 
 /**
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public class BFS<T> implements Searcher<T>{
 

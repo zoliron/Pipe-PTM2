@@ -5,7 +5,7 @@ import java.util.List;
 
 
 /**
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public interface Searchable<T>{
 
