@@ -3,7 +3,6 @@ package com.pipe.searcher;
 import com.pipe.searchable.Searchable;
 import com.pipe.searchable.State;
 
-import java.security.ProtectionDomain;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -43,7 +42,7 @@ public abstract class CommonSearcher<T> implements Searcher<T> {
         }
         return new Solution<T>(arrayList);
     }
-
+    @Override
     public Solution<T> search(Searchable<T> s){
         newSearch();
         addToOpenList(s.getInitialState());
@@ -64,7 +63,12 @@ public abstract class CommonSearcher<T> implements Searcher<T> {
                         addToOpenList(state);
                     }
                     else {
-                        if(openList.removeIf(new Predicate<State<T>>())) {
+                        if(openList.removeIf(new Predicate<State<T>>() {
+                            @Override
+                            public boolean test(State<T> tState) {
+                                return false;
+                            }
+                        })) {
                             @Override
                             public boolean test(State<T> tState) {
                                 return false;
@@ -75,5 +79,9 @@ public abstract class CommonSearcher<T> implements Searcher<T> {
             }
         }
         return null;
+    }
+    @Override
+    public int getNumberOfNodesEvaluated(){
+        return getEvaluatedNodes();
     }
 }
