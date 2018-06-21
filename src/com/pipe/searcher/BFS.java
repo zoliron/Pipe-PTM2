@@ -16,22 +16,16 @@ public class BFS<T> implements Searcher<T>{
 
 	@Override
 	public State<T> search(Searchable<T> searchable){
-		int n = 0;
-
 		Queue<State<T>> queue = new LinkedList<>();
 		Set<State<T>> visited = new HashSet<>();
 
 		// Add the initial state.
+		State<T> initial = searchable.getInitialState();
 		queue.add(searchable.getInitialState());
+		visited.add(initial);
 
 		while (!queue.isEmpty()){
-			// Poll the head.
 			State<T> state = queue.remove();
-
-			// Mark as visited.
-			visited.add(state);
-
-			System.out.print("\rsteps=" + (++n));
 
 			// Check if we are on the goal state.
 			if (searchable.isGoal(state))
@@ -39,12 +33,12 @@ public class BFS<T> implements Searcher<T>{
 
 			List<State<T>> possibleStates = searchable.getAllPossibleStates(state);
 			for (State<T> possibleState : possibleStates){
-				if (!visited.contains(possibleState))
+				if (!visited.contains(possibleState)){
+					visited.add(possibleState);
 					queue.add(possibleState);
+				}
 			}
 		}
-
-		System.out.println();
 
 		return null;
 	}
