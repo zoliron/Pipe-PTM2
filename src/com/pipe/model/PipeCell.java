@@ -175,8 +175,7 @@ public abstract class PipeCell{
 			return false;
 
 		PipeCell other = (PipeCell)obj;
-		return Objects.equals(getClass(), obj.getClass())
-				&& Objects.equals(coordinates, other.coordinates);
+		return Objects.equals(getClass(), other.getClass()) && Objects.equals(coordinates, other.coordinates);
 	}
 
 
