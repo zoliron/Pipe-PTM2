@@ -125,6 +125,20 @@ public class PipeBoard implements Cloneable{
 
 
 
+	/**
+	 * Returns {@code true} if the {@link PipeCell}s at the specified positions are connected, otherwise returns {@code false}.
+	 */
+	public boolean isConnected(Point p1, Point p2){
+		PipeCell c1 = get(p1);
+		PipeCell c2 = get(p2);
+		if (c1 == null || c2 == null)
+			return false;
+
+		return c1.isConnectedWith(c2) && c2.isConnectedWith(c1);
+	}
+
+
+
 	@Override
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
