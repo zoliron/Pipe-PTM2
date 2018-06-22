@@ -19,60 +19,61 @@
 //    }
 //
 //    public abstract void newSearch();
+//
 //    protected abstract boolean addToOpenList(State<T> initialState);
+//
 //    protected abstract State<T> popOpenList();
 //
 //    protected int getEvaluatedNodes() {
 //        return this.evaluatedNodes;
 //    }
 //
-//    protected void setEvaluatedNodes(int evaluatedNodes){
+//    protected void setEvaluatedNodes(int evaluatedNodes) {
 //        this.evaluatedNodes = evaluatedNodes;
 //    }
 //
-//    protected Solution<T> backTrace(State<T> goalState, State<T> sourceState) throws Exception{
+//    protected Solution<T> backTrace(State<T> goalState, State<T> sourceState) throws Exception {
 //        ArrayList<State<T>> arrayList = new ArrayList<>();
 //        arrayList.add(goalState);
 //
-//        while(arrayList.get(0) != null && !arrayList.get(0).equals(sourceState) && arrayList.get(0).getCameFrom() != null){
+//        while (arrayList.get(0) != null && !arrayList.get(0).equals(sourceState) && arrayList.get(0).getCameFrom() != null) {
 //            arrayList.add(0, (State<T>) arrayList.get(0).getCameFrom());
 //        }
-//        if arrayList.isEmpty(){
+//        if arrayList.isEmpty() {
 //            throw new Exception("Backtrace is empty !");
 //        }
 //        return new Solution<T>(arrayList);
 //    }
+//
 //    @Override
-//    public Solution<T> search(Searchable<T> s){
+//    public Solution<T> search(Searchable<T> s) {
 //        newSearch();
 //        addToOpenList(s.getInitialState());
 //        Set<State<T>> closedSet = new HashSet<State<T>>();
 //
-//        while(!openList.isEmpty()){
+//        while (!openList.isEmpty()) {
 //            State<T> n = popOpenList();
 //            closedSet.add(n);
-//            if(s.isGoal(n)){
-//                try{
+//            if (s.isGoal(n)) {
+//                try {
 //                    return backTrace(n, s.getInitialState());
-//                } catch (Exception e) {e.printStackTrace();}
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
 //            }
 //            Collection<State<T>> successors = s.getAllPossibleStates(n);
-//            for(State<T> state : successors){
-//                if(!closedSet.contains(state)){
-//                    if(!openList.contains(state)){
+//            for (State<T> state : successors) {
+//                if (!closedSet.contains(state)) {
+//                    if (!openList.contains(state)) {
 //                        addToOpenList(state);
-//                    }
-//                    else {
-//                        if(openList.removeIf(new Predicate<State<T>>() {
+//                    } else {
+//                        if (openList.removeIf(new Predicate<State<T>>() {
 //                            @Override
 //                            public boolean test(State<T> tState) {
-//                                return false;
+//                                return tState.getCost() > state.getCost() && tState.equals(state);
 //                            }
 //                        })) {
-//                            @Override
-//                            public boolean test(State<T> tState) {
-//                                return false;
-//                            }
+//                            addToOpenList(state);
 //                        }
 //                    }
 //                }
@@ -80,8 +81,9 @@
 //        }
 //        return null;
 //    }
+//
 //    @Override
-//    public int getNumberOfNodesEvaluated(){
+//    public int getNumberOfNodesEvaluated() {
 //        return getEvaluatedNodes();
 //    }
 //}
