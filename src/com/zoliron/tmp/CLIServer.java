@@ -6,7 +6,7 @@ import com.zoliron.server.Server;
 
 
 /**
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public class CLIServer{
 

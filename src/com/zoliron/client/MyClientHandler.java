@@ -8,7 +8,7 @@ import java.io.OutputStream;
 /**
  * The {@link ClientHandler} implementation.
  *
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public class MyClientHandler implements ClientHandler{
 

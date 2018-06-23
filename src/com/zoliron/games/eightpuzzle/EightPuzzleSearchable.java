@@ -12,7 +12,7 @@ import java.util.Objects;
 
 
 /**
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public class EightPuzzleSearchable implements Searchable<EightPuzzleState>{
 

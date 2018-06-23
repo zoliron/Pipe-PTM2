@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * Encapsulate cell within {@link PipeBoard}.
  *
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public abstract class PipeCell{
 

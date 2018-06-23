@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Encapsulate the {@link Searcher} crucial information through the algorithm run.
  *
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public class SearcherNode<S> implements Comparable<SearcherNode<S>>{
 

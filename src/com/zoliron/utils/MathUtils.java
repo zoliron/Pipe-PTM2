@@ -1,7 +1,7 @@
 package com.zoliron.utils;
 
 /**
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public class MathUtils{
 

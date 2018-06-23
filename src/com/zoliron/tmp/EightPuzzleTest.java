@@ -9,7 +9,7 @@ import com.zoliron.searcher.algorithms.BFS;
 
 
 /**
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public class EightPuzzleTest{
 

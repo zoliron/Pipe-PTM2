@@ -7,7 +7,7 @@ import com.zoliron.utils.Point;
 /**
  * A '|' or '-' {@link PipeCell}.
  *
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public class IPipeCell extends DegreesPipeCell{
 
