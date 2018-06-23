@@ -32,11 +32,11 @@ public class DFS<S> extends AbstractSearcher<S>{
 	/**
 	 * Performs a DFS visit.
 	 */
-	private Solution<S> dfs(Searchable<S> searchable, SearcherNode<S> node, Set<SearcherNode<S>> visited){
+	private Solution<S> dfs(Searchable<S> searchable, SearcherNode<S> node, Set<S> visited){
 		incrementIteration();
 
 		// Mark as visited.
-		visited.add(node);
+		visited.add(node.getState());
 
 		// Check if we are on the goal state.
 		if (searchable.isGoal(node))
@@ -44,7 +44,7 @@ public class DFS<S> extends AbstractSearcher<S>{
 
 		List<SearcherNode<S>> possibleNodes = getAllPossibleNodes(searchable, node);
 		for (SearcherNode<S> possibleNode : possibleNodes){
-			if (!visited.contains(possibleNode)){
+			if (!visited.contains(possibleNode.getState())){
 				Solution<S> solution = dfs(searchable, possibleNode, visited);
 				if (solution != null)
 					return solution;

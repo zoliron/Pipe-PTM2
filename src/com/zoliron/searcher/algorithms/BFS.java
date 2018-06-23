@@ -21,12 +21,12 @@ public class BFS<S> extends AbstractSearcher<S>{
 	@Override
 	public Solution<S> search(Searchable<S> searchable){
 		Queue<SearcherNode<S>> queue = new LinkedList<>();
-		Set<SearcherNode<S>> visited = new HashSet<>();
+		Set<S> visited = new HashSet<>();
 
 		// Add the initial state.
 		SearcherNode<S> initialNode = getInitialNode(searchable);
 		queue.add(initialNode);
-		visited.add(initialNode);
+		visited.add(initialNode.getState());
 
 		while (!queue.isEmpty()){
 			incrementIteration();
@@ -45,8 +45,8 @@ public class BFS<S> extends AbstractSearcher<S>{
 
 			List<SearcherNode<S>> possibleNodes = getAllPossibleNodes(searchable, node);
 			for (SearcherNode<S> possibleNode : possibleNodes){
-				if (!visited.contains(possibleNode)){
-					visited.add(node);
+				if (!visited.contains(possibleNode.getState())){
+					visited.add(node.getState());
 					queue.add(possibleNode);
 				}
 			}
