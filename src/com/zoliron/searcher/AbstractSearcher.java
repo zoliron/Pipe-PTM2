@@ -17,6 +17,31 @@ public abstract class AbstractSearcher<S> implements Searcher<S>{
 
 
 	/**
+	 * The total number od iterations.
+	 */
+	private int numOfIterations = 0;
+
+
+
+	/**
+	 * Increment the iteration counter.
+	 */
+	protected void incremntIteration(){
+		numOfIterations += 1;
+	}
+
+
+
+	/**
+	 * Returns the total number od iterations.
+	 */
+	public int getNumOfIterations(){
+		return numOfIterations;
+	}
+
+
+
+	/**
 	 * Returns the initial node.
 	 */
 	protected SearcherNode<S> getInitialNode(Searchable<S> searchable){

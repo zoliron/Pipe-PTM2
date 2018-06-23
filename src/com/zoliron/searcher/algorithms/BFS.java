@@ -29,6 +29,8 @@ public class BFS<S> extends AbstractSearcher<S>{
 		visited.add(initialNode);
 
 		while (!queue.isEmpty()){
+			incremntIteration();
+
 			SearcherNode<S> node = queue.remove();
 
 //			System.out.println(node.getState());
