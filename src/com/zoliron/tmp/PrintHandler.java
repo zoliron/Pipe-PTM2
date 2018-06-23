@@ -1,10 +1,10 @@
 package com.zoliron.tmp;
 
 import com.zoliron.client.ClientHandler;
-import com.zoliron.pipe.PipeBoardParser;
-import com.zoliron.pipe.model.PipeBoard;
-import com.zoliron.pipe.searchable.PipeSearchable;
-import com.zoliron.pipe.searchable.PipeSearchableState;
+import com.zoliron.games.pipe.PipeBoardParser;
+import com.zoliron.games.pipe.model.PipeBoard;
+import com.zoliron.games.pipe.searchable.PipeSearchable;
+import com.zoliron.games.pipe.searchable.PipeSearchableState;
 import com.zoliron.searcher.Solution;
 import com.zoliron.searcher.algorithms.BFS;
 

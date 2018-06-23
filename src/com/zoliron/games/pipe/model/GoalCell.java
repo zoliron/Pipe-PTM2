@@ -1,24 +1,29 @@
-package com.zoliron.pipe.model;
+package com.zoliron.games.pipe.model;
 
 import com.zoliron.utils.Point;
 
 
 
 /**
+ * A goal {@link PipeCell}.
+ *
  * @author Yaniv Zolicha
  */
-public class SourceCell extends PipeCell{
+public class GoalCell extends PipeCell{
 
 
 
-	public SourceCell(Point coordinates){
+	/**
+	 * Creates new {@link GoalCell} with the specified coordinates.
+	 */
+	public GoalCell(Point coordinates){
 		super(coordinates);
 	}
 
 
 
 	@Override
-	public boolean isSource(){
+	public boolean isGoal(){
 		return true;
 	}
 
@@ -33,14 +38,14 @@ public class SourceCell extends PipeCell{
 
 	@Override
 	public String toString(){
-		return "s";
+		return "g";
 	}
 
 
 
 	@Override
 	public PipeCell deepCopy(){
-		return new SourceCell(getCoordinates());
+		return new GoalCell(getCoordinates());
 	}
 
 

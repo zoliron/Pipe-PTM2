@@ -1,4 +1,4 @@
-package com.zoliron.pipe.model;
+package com.zoliron.games.pipe.model;
 
 import com.zoliron.utils.Point;
 

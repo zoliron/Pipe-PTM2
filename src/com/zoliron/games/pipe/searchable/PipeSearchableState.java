@@ -1,7 +1,7 @@
-package com.zoliron.pipe.searchable;
+package com.zoliron.games.pipe.searchable;
 
-import com.zoliron.pipe.model.PipeBoard;
-import com.zoliron.pipe.model.PipeCell;
+import com.zoliron.games.pipe.model.PipeBoard;
+import com.zoliron.games.pipe.model.PipeCell;
 import com.zoliron.utils.Point;
 
 import java.util.HashSet;

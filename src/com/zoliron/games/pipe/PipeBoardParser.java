@@ -1,6 +1,6 @@
-package com.zoliron.pipe;
+package com.zoliron.games.pipe;
 
-import com.zoliron.pipe.model.*;
+import com.zoliron.games.pipe.model.*;
 import com.zoliron.utils.Point;
 
 import java.util.List;
