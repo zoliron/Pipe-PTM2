@@ -1,0 +1,108 @@
+package com.zoliron.games.eightpuzzle;
+
+import com.zoliron.searchable.Searchable;
+import com.zoliron.searcher.SearcherNode;
+import com.zoliron.utils.Point;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+
+
+/**
+ * @author Yaniv Zolicha
+ */
+public class EightPuzzleSearchable implements Searchable<EightPuzzleState>{
+
+
+
+	/**
+	 * The initial board.
+	 */
+	private final EightPuzzle puzzle;
+
+
+
+	/**
+	 * Creates new {@link EightPuzzleState} with the specified puzzle.
+	 */
+	public EightPuzzleSearchable(EightPuzzle puzzle){
+		this.puzzle = puzzle;
+	}
+
+
+
+	@Override
+	public EightPuzzleState getInitialState(){
+		return new EightPuzzleState(puzzle, null, null);
+	}
+
+
+
+	@Override
+	public boolean isGoal(SearcherNode<EightPuzzleState> node){
+		return Objects.equals(node.getState().getPuzzle(), EightPuzzle.GOAL);
+	}
+
+
+
+	@Override
+	public List<EightPuzzleState> getAllPossibleStates(EightPuzzleState state){
+		EightPuzzle puzzle = state.getPuzzle();
+		Point emptyPoint = puzzle.getEmptyPoint();
+
+		List<EightPuzzleState> possibleStates = new ArrayList<>(4);
+		EightPuzzleState rightState = tryAction(puzzle, emptyPoint, EightPuzzle.Action.LEFT);
+		if (rightState != null)
+			possibleStates.add(rightState);
+
+		EightPuzzleState bottomState = tryAction(puzzle, emptyPoint, EightPuzzle.Action.TOP);
+		if (bottomState != null)
+			possibleStates.add(bottomState);
+
+		EightPuzzleState leftState = tryAction(puzzle, emptyPoint, EightPuzzle.Action.RIGHT);
+		if (leftState != null)
+			possibleStates.add(leftState);
+
+		EightPuzzleState topState = tryAction(puzzle, emptyPoint, EightPuzzle.Action.BOTTOM);
+		if (topState != null)
+			possibleStates.add(topState);
+
+		return possibleStates;
+	}
+
+
+
+	@Override
+	public double calculateCost(EightPuzzleState fromState, EightPuzzleState toState){
+		return (fromState == null) ? 0d : 1d;
+	}
+
+
+
+	@Override
+	public double calculateEstimation(EightPuzzleState state){
+		return 0d;
+	}
+
+
+
+	/**
+	 * Try to perform the specified action; Returns a new {@link EightPuzzleState} if succeeded or {@code null} otherwise.
+	 */
+	private static EightPuzzleState tryAction(EightPuzzle puzzle, Point emptyPoint, EightPuzzle.Action action){
+		Point neighbourPoint = puzzle.getPointForAction(emptyPoint, action);
+		if (!puzzle.isValidPoint(neighbourPoint))
+			return null;
+
+		EightPuzzle newPuzzle = puzzle.deepCopy();
+		newPuzzle.swap(emptyPoint, neighbourPoint);
+
+		return new EightPuzzleState(newPuzzle, neighbourPoint, action);
+
+	}
+
+
+
+}
