@@ -1,5 +1,6 @@
 package com.zoliron.searcher;
 
+import java.time.Duration;
 import java.util.List;
 
 
@@ -35,14 +36,14 @@ public class Solution<S>{
 	/**
 	 * The solution duration, in milliseconds.
 	 */
-	private final long duration;
+	private final Duration duration;
 
 
 
 	/**
 	 * Creates new {@link Solution} with the specified cost and states.
 	 */
-	Solution(List<S> states, double cost, int numOfIteration, long duration){
+	Solution(List<S> states, double cost, int numOfIteration, Duration duration){
 		this.states = states;
 		this.cost = cost;
 		this.numOfIteration = numOfIteration;
@@ -56,6 +57,15 @@ public class Solution<S>{
 	 */
 	public List<S> getStates(){
 		return states;
+	}
+
+
+
+	/**
+	 * Returns the solution last state.
+	 */
+	public S getLastState(){
+		return states.get(states.size() - 1);
 	}
 
 
@@ -81,7 +91,7 @@ public class Solution<S>{
 	/**
 	 * Returns the solution duration, in milliseconds.
 	 */
-	public long getDuration(){
+	public Duration getDuration(){
 		return duration;
 	}
 
@@ -92,9 +102,9 @@ public class Solution<S>{
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("Cost: ").append(cost).append("\n");
-		sb.append("States:\n");
-		for (S state : states)
-			sb.append(state).append("\n");
+		sb.append("Iterations: ").append(numOfIteration).append("\n");
+		sb.append("Duration: ").append(duration).append("\n");
+		sb.append("Final:\n").append(getLastState()).append("\n");
 
 		return sb.toString();
 	}

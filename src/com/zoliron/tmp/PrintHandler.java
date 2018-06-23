@@ -28,18 +28,19 @@ public class PrintHandler implements ClientHandler{
 			System.out.println(board);
 
 			PipeSearchable p = new PipeSearchable(board);
-			System.out.println("\n\n");
+//			System.out.println(p.getInitialState().getReachablePointsFromSource());
+//			System.out.println("\n\n");
 
 			long t, diff;
 
-//			t = System.currentTimeMillis();
-//			Solution<PipeSearchableState> s1 = new BFS<PipeSearchableState>().search(p);
-//			diff = System.currentTimeMillis() - t;
+			t = System.currentTimeMillis();
+			Solution<PipeSearchableState> s1 = new BFS<PipeSearchableState>().search(p);
+			diff = System.currentTimeMillis() - t;
 
-//			System.out.println("BFS: Time=" + diff);
-//			System.out.println();
-//			System.out.println(s1.getStates().get(s1.getStates().size() - 1));
-//			System.out.println("\n\n");
+			System.out.println("BFS: Time=" + diff);
+			System.out.println();
+			System.out.println(s1);
+			System.out.println("\n\n");
 
 			t = System.currentTimeMillis();
 			Solution<PipeSearchableState> s2 = new BestFirstSearch<PipeSearchableState>().search(p);
@@ -47,7 +48,7 @@ public class PrintHandler implements ClientHandler{
 
 			System.out.println("BestFirstSearch: Time=" + diff);
 			System.out.println();
-			System.out.println(s2.getStates().get(s2.getStates().size() - 1));
+			System.out.println(s2);
 			System.out.println("\n\n");
 
 

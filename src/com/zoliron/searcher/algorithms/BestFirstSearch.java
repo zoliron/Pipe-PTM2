@@ -19,17 +19,23 @@ public class BestFirstSearch<S> extends AbstractSearcher<S>{
 	@Override
 	public Solution<S> search(Searchable<S> searchable){
 		Queue<SearcherNode<S>> queue = new PriorityQueue<>();
-		Set<SearcherNode<S>> visited = new HashSet<>();
+
+		Map<S, SearcherNode<S>> open = new HashMap<>();
+		Set<S> closed = new HashSet<>();
 
 		// Add the initial state.
 		SearcherNode<S> initialNode = getInitialNode(searchable);
+		open.put(initialNode.getState(), initialNode);
 		queue.add(initialNode);
 
 		while (!queue.isEmpty()){
 			incrementIteration();
 
 			SearcherNode<S> node = queue.remove();
-			visited.add(initialNode);
+			if (open.remove(node.getState()) == null)
+				throw new IllegalStateException("Open node does not in queue!");
+			closed.add(node.getState());
+
 
 //			System.out.println(node.getState());
 //			System.out.println("Score: " + node.getScore());
@@ -43,10 +49,19 @@ public class BestFirstSearch<S> extends AbstractSearcher<S>{
 
 			List<SearcherNode<S>> possibleNodes = getAllPossibleNodes(searchable, node);
 			for (SearcherNode<S> possibleNode : possibleNodes){
-				if (!visited.contains(possibleNode) && !queue.contains(possibleNode))
+				S possibleState = possibleNode.getState();
+				SearcherNode<S> openNode = open.get(possibleState);
+
+				if (!closed.contains(possibleState) && (openNode == null)){
+					open.put(possibleState, possibleNode);
 					queue.add(possibleNode);
-				else if (queue.removeIf(testNode -> isBetterThan(possibleNode, testNode)))
+				} else if (isBetterThan(possibleNode, openNode)){
+					if (!queue.remove(openNode))
+						throw new IllegalStateException("Open node does not in queue!");
+
+					open.put(possibleState, possibleNode);
 					queue.add(possibleNode);
+				}
 			}
 		}
 

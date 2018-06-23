@@ -2,6 +2,7 @@ package com.zoliron.searcher;
 
 import com.zoliron.searchable.Searchable;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +29,8 @@ public abstract class AbstractSearcher<S> implements Searcher<S>{
 	 */
 	protected void incrementIteration(){
 		numOfIterations += 1;
+
+//		System.out.print("\rIterations: " + numOfIterations);
 	}
 
 
@@ -87,7 +90,7 @@ public abstract class AbstractSearcher<S> implements Searcher<S>{
 				.map(SearcherNode::getState)
 				.collect(Collectors.toList());
 
-		return new Solution<>(states, goal.getCost(), getNumOfIterations(), 0L);
+		return new Solution<>(states, goal.getCost(), getNumOfIterations(), Duration.ZERO);
 	}
 
 

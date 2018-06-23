@@ -2,7 +2,6 @@ package com.zoliron.searcher;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 
 
 
@@ -146,24 +145,6 @@ public class SearcherNode<S> implements Comparable<SearcherNode<S>>{
 	@Override
 	public int compareTo(SearcherNode<S> other){
 		return Double.compare(score, other.score);
-	}
-
-
-
-	@Override
-	public int hashCode(){
-		return Objects.hashCode(state);
-	}
-
-
-
-	@Override
-	public boolean equals(Object obj){
-		if (!(obj instanceof SearcherNode))
-			return false;
-
-		SearcherNode<?> other = (SearcherNode<?>)obj;
-		return Objects.equals(state, other.state);
 	}
 
 
