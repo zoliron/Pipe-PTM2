@@ -6,7 +6,8 @@ import com.zoliron.games.pipe.model.PipeBoard;
 import com.zoliron.games.pipe.searchable.PipeSearchable;
 import com.zoliron.games.pipe.searchable.PipeSearchableState;
 import com.zoliron.searcher.Solution;
-import com.zoliron.searcher.algorithms.HillClimbing;
+import com.zoliron.searcher.algorithms.AStar;
+import com.zoliron.searcher.algorithms.BestFirstSearch;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -41,23 +42,32 @@ public class PrintHandler implements ClientHandler{
 //			System.out.println(s1);
 //			System.out.println("\n\n");
 
-//			t = System.currentTimeMillis();
-//			Solution<PipeSearchableState> s2 = new BestFirstSearch<PipeSearchableState>().search(p);
-//			diff = System.currentTimeMillis() - t;
-//
-//			System.out.println("BestFirstSearch: Time=" + diff);
-//			System.out.println();
-//			System.out.println(s2);
-//			System.out.println("\n\n");
-
 			t = System.currentTimeMillis();
-			Solution<PipeSearchableState> s2 = new HillClimbing<PipeSearchableState>().search(p);
+			Solution<PipeSearchableState> s2 = new BestFirstSearch<PipeSearchableState>().search(p);
 			diff = System.currentTimeMillis() - t;
 
-			System.out.println("HillClimbing: Time=" + diff);
+			System.out.println("BestFirstSearch: Time=" + diff);
 			System.out.println();
 			System.out.println(s2);
 			System.out.println("\n\n");
+
+//			t = System.currentTimeMillis();
+//			Solution<PipeSearchableState> s3 = new HillClimbing<PipeSearchableState>().search(p);
+//			diff = System.currentTimeMillis() - t;
+//
+//			System.out.println("HillClimbing: Time=" + diff);
+//			System.out.println();
+//			System.out.println(s3);
+//			System.out.println("\n\n");
+
+//			t = System.currentTimeMillis();
+//			Solution<PipeSearchableState> s4 = new AStar<PipeSearchableState>().search(p);
+//			diff = System.currentTimeMillis() - t;
+//
+//			System.out.println("AStar: Time=" + diff);
+//			System.out.println();
+//			System.out.println(s4);
+//			System.out.println("\n\n");
 
 
 
