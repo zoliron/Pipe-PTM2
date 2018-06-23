@@ -2,6 +2,7 @@ package com.zoliron.games.eightpuzzle;
 
 import com.zoliron.searchable.Searchable;
 import com.zoliron.searcher.SearcherNode;
+import com.zoliron.utils.MathUtils;
 import com.zoliron.utils.Point;
 
 import java.util.ArrayList;
@@ -83,7 +84,17 @@ public class EightPuzzleSearchable implements Searchable<EightPuzzleState>{
 
 	@Override
 	public double calculateEstimation(EightPuzzleState state){
-		return 0d;
+		EightPuzzle puzzle = state.getPuzzle();
+
+		double manhattanDistance = 0d;
+		for (Point puzzlePoint : puzzle){
+			String tile = puzzle.getTile(puzzlePoint);
+			Point goalPoint = EightPuzzle.GOAL.getPoint(tile);
+
+			manhattanDistance += MathUtils.manhattanDistance(puzzlePoint, goalPoint);
+		}
+
+		return manhattanDistance;
 	}
 
 

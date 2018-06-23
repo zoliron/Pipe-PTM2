@@ -3,13 +3,14 @@ package com.zoliron.games.eightpuzzle;
 import com.zoliron.utils.Point;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 
 
 /**
  * @author Yaniv Zolicha
  */
-public class EightPuzzle{
+public class EightPuzzle implements Iterable<Point>{
 
 
 
@@ -51,17 +52,38 @@ public class EightPuzzle{
 
 
 	/**
+	 * Returns the tile of the specified point.
+	 */
+	public String getTile(Point p){
+		if (!isValidPoint(p))
+			throw new IllegalStateException("Invalid point: " + p);
+
+		return board[p.x][p.y];
+	}
+
+
+
+	/**
 	 * Returns the puzzle empty point.
 	 */
 	public Point getEmptyPoint(){
+		return getPoint(" ");
+	}
+
+
+
+	/**
+	 * Find the puzzle point for the specified tile.
+	 */
+	public Point getPoint(String tile){
 		for (int x = 0; x < COLUMN_COUNT; x++){
 			for (int y = 0; y < ROW_COUNT; y++){
-				if (" ".equals(board[x][y]))
+				if (tile.equals(board[x][y]))
 					return new Point(x, y);
 			}
 		}
 
-		throw new IllegalStateException("Unsupported board: " + Arrays.toString(board));
+		throw new IllegalStateException("Unsupported tile: " + tile);
 	}
 
 
@@ -151,12 +173,66 @@ public class EightPuzzle{
 
 
 
+	@Override
+	public Iterator<Point> iterator(){
+		return new EightPuzzleIterator();
+	}
+
+
+
 	/**
 	 * The puzzle actions.
 	 */
 	public enum Action{
 
 		LEFT, TOP, RIGHT, BOTTOM
+
+	}
+
+
+
+	/**
+	 * The {@link EightPuzzle} iterator.
+	 */
+	private static class EightPuzzleIterator implements Iterator<Point>{
+
+
+
+		/**
+		 * The current x.
+		 */
+		private int x = 0;
+
+
+
+		/**
+		 * The current y.
+		 */
+		private int y = 0;
+
+
+
+		@Override
+		public boolean hasNext(){
+			return x < COLUMN_COUNT && y < ROW_COUNT;
+		}
+
+
+
+		@Override
+		public Point next(){
+			Point next = new Point(x, y);
+
+			if (x == COLUMN_COUNT - 1){
+				x = 0;
+				y++;
+			} else
+				x++;
+
+			return next;
+		}
+
+
 
 	}
 
