@@ -76,8 +76,8 @@ public class EightPuzzle implements Iterable<Point>{
 	 * Find the puzzle point for the specified tile.
 	 */
 	public Point getPoint(String tile){
-		for (int x = 0; x < COLUMN_COUNT; x++){
-			for (int y = 0; y < ROW_COUNT; y++){
+		for (int y = 0; y < ROW_COUNT; y++){
+			for (int x = 0; x < COLUMN_COUNT; x++){
 				if (tile.equals(board[y][x]))
 					return new Point(x, y);
 			}
@@ -134,8 +134,8 @@ public class EightPuzzle implements Iterable<Point>{
 	public EightPuzzle deepCopy(){
 		String[][] copy = new String[COLUMN_COUNT][ROW_COUNT];
 
-		for (int x = 0; x < COLUMN_COUNT; x++)
-			for (int y = 0; y < ROW_COUNT; y++)
+		for (int y = 0; y < ROW_COUNT; y++)
+			for (int x = 0; x < COLUMN_COUNT; x++)
 				copy[y][x] = board[y][x];
 
 		return new EightPuzzle(copy);
@@ -146,8 +146,9 @@ public class EightPuzzle implements Iterable<Point>{
 	@Override
 	public String toString(){
 		StringBuilder sb = new StringBuilder(ROW_COUNT * COLUMN_COUNT);
-		for (int x = 0; x < COLUMN_COUNT; x++)
-			for (int y = 0; y < ROW_COUNT; y++)
+
+		for (int y = 0; y < ROW_COUNT; y++)
+			for (int x = 0; x < COLUMN_COUNT; x++)
 				sb.append(board[y][x]);
 
 		return sb.toString();
