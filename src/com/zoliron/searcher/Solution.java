@@ -103,7 +103,7 @@ public class Solution<S>{
 
 		sb.append("Cost: ").append(cost).append("\n");
 		sb.append("Iterations: ").append(numOfIteration).append("\n");
-		sb.append("Duration: ").append(duration).append("\n");
+		sb.append("Duration: ").append(duration.getSeconds()).append(" seconds\n");
 		sb.append("Final:\n").append(getLastState()).append("\n");
 
 		return sb.toString();
