@@ -4,9 +4,9 @@ import com.zoliron.client.ClientHandler;
 import com.zoliron.pipe.PipeBoardParser;
 import com.zoliron.pipe.model.PipeBoard;
 import com.zoliron.pipe.searchable.PipeSearchable;
-import com.zoliron.pipe.searchable.PipeState;
-import com.zoliron.searchable.State;
-import com.zoliron.searcher.BFS;
+import com.zoliron.pipe.searchable.PipeSearchableState;
+import com.zoliron.searcher.Solution;
+import com.zoliron.searcher.algorithms.BFS;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -30,13 +30,11 @@ public class PrintHandler implements ClientHandler{
 
 			System.out.println("\n\n");
 
-			State<PipeState> g = new BFS<PipeState>().search(p);
+			Solution<PipeSearchableState> s = new BFS<PipeSearchableState>().search(p);
 
 			System.out.println("\n\n");
 
-			System.out.println(g.getStateObject().board);
-
-			p.isGoal(g);
+			System.out.println(s);
 
 //			List<State<PipeState>> states = p.getAllPossibleStates(p.getInitialState());
 //			for (State<PipeState> state : states){

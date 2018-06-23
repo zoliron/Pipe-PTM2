@@ -2,15 +2,29 @@ package com.zoliron.cachemanager;
 
 import java.io.*;
 
+
+
 public class File implements CacheManager{
+
+
+
 	private String problem = null;
+
+
 
 	public File(){
 	}
 
+
+
 	public static class Problem implements Serializable{
+
+
+
 		public String maze = null;
 	}
+
+
 
 	@Override
 	public void save(String newProblem) throws IOException{
@@ -23,6 +37,8 @@ public class File implements CacheManager{
 		objectOutputStream.close();
 
 	}
+
+
 
 	@Override
 	public String load() throws IOException, ClassNotFoundException{

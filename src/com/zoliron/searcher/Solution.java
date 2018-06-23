@@ -1,29 +1,70 @@
 package com.zoliron.searcher;
 
-import com.zoliron.searchable.State;
+import java.util.List;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
 
-public class Solution<T> implements Serializable{
 
-	private static final long serialVersionUID = 1L;
-	Collection<State<T>> collection;
+/**
+ * Encapsulate the {@link Searcher} solution.
+ */
+public class Solution<S>{
 
-	public Solution(){
-		this.collection = new ArrayList<State<T>>();
 
+
+	/**
+	 * The solution cost.
+	 */
+	private final double cost;
+
+
+
+	/**
+	 * The solution states.
+	 */
+	private final List<S> states;
+
+
+
+	/**
+	 * Creates new {@link Solution} with the specified cost and states.
+	 */
+	Solution(double cost, List<S> states){
+		this.cost = cost;
+		this.states = states;
 	}
 
-	public Solution(Collection<State<T>> collection){
-		this.collection = collection;
+
+
+	/**
+	 * Returns the solution cost.
+	 */
+	public double getCost(){
+		return cost;
 	}
-	public Collection<State<T>> getCollection(){
-		return collection;
+
+
+
+	/**
+	 * Returns the solution states.
+	 */
+	public List<S> getStates(){
+		return states;
 	}
-	public void setCollection(Collection<State<T>> collection){
-		this.collection = collection;
+
+
+
+	@Override
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("Cost: ").append(cost).append("\n");
+		sb.append("States:\n");
+		for (S state : states)
+			sb.append(state).append("\n");
+
+		return sb.toString();
 	}
+
+
+
 }
-
