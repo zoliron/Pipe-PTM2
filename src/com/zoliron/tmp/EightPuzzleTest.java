@@ -21,8 +21,11 @@ public class EightPuzzleTest{
 		EightPuzzleSearchable searchable = new EightPuzzleSearchable(puzzle);
 
 		Solution<EightPuzzleState> solution = new AStar<EightPuzzleState>().search(searchable);
-		for (EightPuzzleState state : solution)
+		for (EightPuzzleState state : solution){
 			System.out.println(state);
+			System.out.println(state.getPuzzle());
+			System.out.println();
+		}
 	}
 
 
