@@ -10,6 +10,8 @@ import java.util.*;
 
 
 /**
+ * The A* algorithm implementation.
+ *
  * @author Yaniv Zolicha
  */
 public class AStar<S> extends AbstractSearcher<S>{
