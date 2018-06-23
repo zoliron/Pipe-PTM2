@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * Encapsulate the pipe game board.
  *
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public class PipeBoard implements Cloneable{
 

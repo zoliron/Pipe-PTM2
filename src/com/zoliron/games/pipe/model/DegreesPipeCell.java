@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * A degrees rotateable {@link PipeCell}.
  *
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public abstract class DegreesPipeCell extends PipeCell{
 

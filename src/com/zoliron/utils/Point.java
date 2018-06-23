@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * Encapsulate 2D point.
  *
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public class Point{
 

@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 
 /**
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public class EightPuzzle implements Iterable<Point>{
 

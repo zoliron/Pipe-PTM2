@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * The {@link PipeBoardParser}.
  *
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public class PipeBoardParser{
 

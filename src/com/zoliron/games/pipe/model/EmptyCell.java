@@ -7,7 +7,7 @@ import com.zoliron.utils.Point;
 /**
  * An empty {@link PipeCell}.
  *
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public class EmptyCell extends PipeCell{
 

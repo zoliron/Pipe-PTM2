@@ -13,16 +13,24 @@ import java.util.List;
 
 
 /**
+ * The pipe searchable.
+ *
  * @author Ronen Zolicha
  */
 public class PipeSearchable implements Searchable<PipeSearchableState>{
 
 
 
+	/**
+	 * The initial board.
+	 */
 	private final PipeBoard initial;
 
 
 
+	/**
+	 * Creates new {@link PipeSearchable} with the initial board.
+	 */
 	public PipeSearchable(PipeBoard initial){
 		this.initial = initial;
 	}

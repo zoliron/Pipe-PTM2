@@ -7,7 +7,7 @@ import com.zoliron.utils.Point;
 /**
  * A goal {@link PipeCell}.
  *
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public class GoalCell extends PipeCell{
 

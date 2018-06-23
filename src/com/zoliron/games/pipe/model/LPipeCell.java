@@ -7,7 +7,7 @@ import com.zoliron.utils.Point;
 /**
  * A 'L' or 'F' or '7' or 'J' {@link PipeCell}.
  *
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public class LPipeCell extends DegreesPipeCell{
 

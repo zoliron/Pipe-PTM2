@@ -5,7 +5,7 @@ import com.zoliron.utils.Point;
 
 
 /**
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public class SourceCell extends PipeCell{
 
