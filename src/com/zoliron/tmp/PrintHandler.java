@@ -42,14 +42,14 @@ public class PrintHandler implements ClientHandler{
 //			System.out.println(s1);
 //			System.out.println("\n\n");
 
-			t = System.currentTimeMillis();
-			Solution<PipeSearchableState> s2 = new BestFirstSearch<PipeSearchableState>().search(p);
-			diff = System.currentTimeMillis() - t;
-
-			System.out.println("BestFirstSearch: Time=" + diff);
-			System.out.println();
-			System.out.println(s2);
-			System.out.println("\n\n");
+//			t = System.currentTimeMillis();
+//			Solution<PipeSearchableState> s2 = new BestFirstSearch<PipeSearchableState>().search(p);
+//			diff = System.currentTimeMillis() - t;
+//
+//			System.out.println("BestFirstSearch: Time=" + diff);
+//			System.out.println();
+//			System.out.println(s2);
+//			System.out.println("\n\n");
 
 //			t = System.currentTimeMillis();
 //			Solution<PipeSearchableState> s3 = new HillClimbing<PipeSearchableState>().search(p);
@@ -60,14 +60,14 @@ public class PrintHandler implements ClientHandler{
 //			System.out.println(s3);
 //			System.out.println("\n\n");
 
-//			t = System.currentTimeMillis();
-//			Solution<PipeSearchableState> s4 = new AStar<PipeSearchableState>().search(p);
-//			diff = System.currentTimeMillis() - t;
-//
-//			System.out.println("AStar: Time=" + diff);
-//			System.out.println();
-//			System.out.println(s4);
-//			System.out.println("\n\n");
+			t = System.currentTimeMillis();
+			Solution<PipeSearchableState> s4 = new AStar<PipeSearchableState>().search(p);
+			diff = System.currentTimeMillis() - t;
+
+			System.out.println("AStar: Time=" + diff);
+			System.out.println();
+			System.out.println(s4);
+			System.out.println("\n\n");
 
 
 
