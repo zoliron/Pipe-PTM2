@@ -26,7 +26,7 @@ public abstract class AbstractSearcher<S> implements Searcher<S>{
 	/**
 	 * Increment the iteration counter.
 	 */
-	protected void incremntIteration(){
+	protected void incrementIteration(){
 		numOfIterations += 1;
 	}
 
@@ -87,7 +87,7 @@ public abstract class AbstractSearcher<S> implements Searcher<S>{
 				.map(SearcherNode::getState)
 				.collect(Collectors.toList());
 
-		return new Solution<>(goal.getCost(), states);
+		return new Solution<>(states, goal.getCost(), getNumOfIterations(), 0L);
 	}
 
 

@@ -33,7 +33,7 @@ public class DFS<S> extends AbstractSearcher<S>{
 	 * Performs a DFS visit.
 	 */
 	private Solution<S> dfs(Searchable<S> searchable, SearcherNode<S> node, Set<SearcherNode<S>> visited){
-		incremntIteration();
+		incrementIteration();
 
 		// Mark as visited.
 		visited.add(node);

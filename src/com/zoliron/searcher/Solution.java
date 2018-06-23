@@ -12,13 +12,6 @@ public class Solution<S>{
 
 
 	/**
-	 * The solution cost.
-	 */
-	private final double cost;
-
-
-
-	/**
 	 * The solution states.
 	 */
 	private final List<S> states;
@@ -26,11 +19,43 @@ public class Solution<S>{
 
 
 	/**
+	 * The solution cost.
+	 */
+	private final double cost;
+
+
+
+	/**
+	 * The solution total number of iterations.
+	 */
+	private final int numOfIteration;
+
+
+
+	/**
+	 * The solution duration, in milliseconds.
+	 */
+	private final long duration;
+
+
+
+	/**
 	 * Creates new {@link Solution} with the specified cost and states.
 	 */
-	Solution(double cost, List<S> states){
-		this.cost = cost;
+	Solution(List<S> states, double cost, int numOfIteration, long duration){
 		this.states = states;
+		this.cost = cost;
+		this.numOfIteration = numOfIteration;
+		this.duration = duration;
+	}
+
+
+
+	/**
+	 * Returns the solution states.
+	 */
+	public List<S> getStates(){
+		return states;
 	}
 
 
@@ -45,10 +70,19 @@ public class Solution<S>{
 
 
 	/**
-	 * Returns the solution states.
+	 * Returns the solution total number of iterations.
 	 */
-	public List<S> getStates(){
-		return states;
+	public int getNumOfIteration(){
+		return numOfIteration;
+	}
+
+
+
+	/**
+	 * Returns the solution duration, in milliseconds.
+	 */
+	public long getDuration(){
+		return duration;
 	}
 
 

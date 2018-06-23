@@ -26,7 +26,7 @@ public class BestFirstSearch<S> extends AbstractSearcher<S>{
 		queue.add(initialNode);
 
 		while (!queue.isEmpty()){
-			incremntIteration();
+			incrementIteration();
 
 			SearcherNode<S> node = queue.remove();
 			visited.add(initialNode);
