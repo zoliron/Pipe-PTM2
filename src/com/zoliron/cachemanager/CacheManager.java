@@ -7,7 +7,7 @@ import java.io.IOException;
 /**
  * The games cache manager.
  *
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public interface CacheManager{
 

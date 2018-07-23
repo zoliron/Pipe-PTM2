@@ -13,7 +13,7 @@ import com.zoliron.utils.Point;
 /**
  * The {@link PipeBoard} game solver.
  *
- * @author Yaniv Zolicha
+ * @author Ronen Zolicha
  */
 public class PipeSolver implements Solver<PipeBoard>{
 
