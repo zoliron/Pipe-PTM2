@@ -56,8 +56,9 @@ public class FileCacheManager implements CacheManager{
 	 * Returns the problem file.
 	 */
 	private static File getProblemFile(String problem){
-		String base64 = Base64.getEncoder().withoutPadding().encodeToString(problem.getBytes());
-		String fileName = base64 + ".data";
+		String name = Base64.getEncoder().withoutPadding().encodeToString(problem.getBytes());
+//		String name = UUID.nameUUIDFromBytes(problem.getBytes()).toString();
+		String fileName = name + ".data";
 
 		return new File(CACHE_DIRECTORY, fileName);
 	}
