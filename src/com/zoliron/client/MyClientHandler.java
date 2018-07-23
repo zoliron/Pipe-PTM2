@@ -29,7 +29,15 @@ public class MyClientHandler implements ClientHandler{
 	public void handleClient(InputStream inFromClient, OutputStream outToClient){
 		try{
 			String problem = readToEnd(inFromClient);
+
+			System.out.println("Problem:");
+			System.out.println(problem);
+
 			String solution = solve(new PipeSolver(), problem);
+
+			System.out.println("Solution:");
+			System.out.println(solution);
+
 			sendSolution(solution, outToClient);
 		} catch (Exception e){
 			e.printStackTrace();
