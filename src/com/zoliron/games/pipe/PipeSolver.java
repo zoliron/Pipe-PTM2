@@ -49,6 +49,9 @@ public class PipeSolver implements Solver<PipeBoard>{
 
 		for (PipeSearchableState state : solution.getStates()){
 			Point action = state.getAction();
+			if (action == null) // Happen only on the initial state.
+				continue;
+
 			int column = action.x;
 			int row = action.y;
 
@@ -70,11 +73,13 @@ public class PipeSolver implements Solver<PipeBoard>{
 		StringBuilder sb = new StringBuilder();
 		for (int row = 0; row < rowCount; row++){
 			for (int column = 0; column < columnCount; column++){
-				sb.append(row).append(',').append(column).append(',').append(clickCount[row][column]).append('\n');
+				if (sb.length() > 0)
+					sb.append('\n');
+
+				sb.append(row).append(',').append(column).append(',').append(clickCount[row][column]);
 			}
 		}
 
-		sb.append("done");
 		return sb.toString();
 	}
 

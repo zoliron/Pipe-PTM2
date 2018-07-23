@@ -3,6 +3,7 @@ package com.zoliron.cachemanager;
 import com.zoliron.utils.IoUtils;
 
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.Base64;
 
 
@@ -19,14 +20,16 @@ public class FileCacheManager implements CacheManager{
 	/**
 	 * The cache directory.
 	 */
-	private static final File CACHE_DIRECTORY = new File("file_cache");
+	private static final File CACHE_DIRECTORY = Paths.get("file_cache").toFile();
 
 
 
 	@Override
 	public void save(String problem, String solution) throws IOException{
-		File file = getProblemFile(problem);
+		if (!CACHE_DIRECTORY.exists() && !CACHE_DIRECTORY.mkdirs())
+			throw new IOException("Failed to create the file cache directory at: " + CACHE_DIRECTORY.getAbsolutePath());
 
+		File file = getProblemFile(problem);
 		try (InputStream is = IoUtils.toInputStream(solution);
 			 OutputStream os = new BufferedOutputStream(new FileOutputStream(file))){
 

@@ -77,10 +77,12 @@ public class MyClientHandler implements ClientHandler{
 	 * Send the specified solution to the client.
 	 */
 	private void sendSolution(String solution, OutputStream os) throws IOException{
-		BufferedOutputStream bos = new BufferedOutputStream(os);
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
 
-		bos.write(solution.getBytes());
-		bos.flush();
+		bw.write(solution);
+		bw.newLine();
+		bw.write("done");
+		bw.flush();
 	}
 
 
