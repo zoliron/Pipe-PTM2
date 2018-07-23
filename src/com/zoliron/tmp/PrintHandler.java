@@ -7,11 +7,8 @@ import com.zoliron.games.pipe.searchable.PipeSearchable;
 import com.zoliron.games.pipe.searchable.PipeSearchableState;
 import com.zoliron.searcher.Solution;
 import com.zoliron.searcher.algorithms.AStar;
-import com.zoliron.searcher.algorithms.BestFirstSearch;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 
@@ -22,7 +19,7 @@ public class PrintHandler implements ClientHandler{
 	@Override
 	public void handleClient(InputStream inFromClient, OutputStream outToClient){
 		try{
-			List<String> rawBoard = readUntilDone(inFromClient);
+			String rawBoard = readToEnd(inFromClient);
 
 			PipeBoard board = new PipeBoardParser().parse(rawBoard);
 			System.out.println(board);
@@ -85,21 +82,17 @@ public class PrintHandler implements ClientHandler{
 
 
 	/**
-	 * Read the specified {@link InputStream} lines until rich 'done' line.
+	 * Read the problem input until "done".
 	 */
-	private static List<String> readUntilDone(InputStream inFromClient) throws IOException{
-		List<String> lines = new ArrayList<>();
+	private String readToEnd(InputStream inFromClient) throws IOException{
+		StringBuilder sb = new StringBuilder();
 
-		BufferedReader reader = new BufferedReader(new InputStreamReader(inFromClient));
+		BufferedReader br = new BufferedReader(new InputStreamReader(inFromClient));
 		String line;
-		while ((line = reader.readLine()) != null){
-			if ("done".equals(line))
-				return lines;
+		while ((line = br.readLine()) != null && !"done".equals(line))
+			sb.append(line).append('\n');
 
-			lines.add(line);
-		}
-
-		return lines;
+		return sb.toString();
 	}
 
 
