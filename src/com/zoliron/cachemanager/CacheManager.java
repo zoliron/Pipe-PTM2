@@ -4,13 +4,27 @@ import java.io.IOException;
 
 
 
+/**
+ * The games cache manager.
+ *
+ * @author Yaniv Zolicha
+ */
 public interface CacheManager{
 
 
 
-	void save(String newProblem) throws IOException;
+	/**
+	 * Save the specified solution for the given problem.
+	 */
+	void save(String problem, String solution) throws IOException;
 
 
 
-	String load() throws IOException, ClassNotFoundException;
+	/**
+	 * Return the cached solution for the specified problem.
+	 */
+	String load(String problem) throws IOException;
+
+
+
 }

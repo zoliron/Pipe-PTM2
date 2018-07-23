@@ -3,6 +3,7 @@ package com.zoliron.games.pipe;
 import com.zoliron.games.pipe.model.*;
 import com.zoliron.utils.Point;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -19,7 +20,8 @@ public class PipeBoardParser{
 	/**
 	 * Parse the specified board.
 	 */
-	public PipeBoard parse(List<String> rawBoard){
+	public PipeBoard parse(String problem){
+		List<String> rawBoard = Arrays.asList(problem.split("\n"));
 		int rowCount = rawBoard.size();
 		int columnCount = rawBoard.get(0).length();
 

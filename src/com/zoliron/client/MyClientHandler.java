@@ -1,7 +1,11 @@
 package com.zoliron.client;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import com.zoliron.cachemanager.CacheManager;
+import com.zoliron.cachemanager.FileCacheManager;
+import com.zoliron.games.pipe.PipeSolver;
+import com.zoliron.solver.Solver;
+
+import java.io.*;
 
 
 
@@ -14,9 +18,69 @@ public class MyClientHandler implements ClientHandler{
 
 
 
+	/**
+	 * The client handler cache manager.
+	 */
+	private final CacheManager cm = new FileCacheManager();
+
+
+
 	@Override
 	public void handleClient(InputStream inFromClient, OutputStream outToClient){
+		try{
+			String problem = readToEnd(inFromClient);
+			String solution = solve(new PipeSolver(), problem);
+			sendSolution(solution, outToClient);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+	}
 
+
+
+	/**
+	 * Read the problem input until "done".
+	 */
+	private String readToEnd(InputStream inFromClient) throws IOException{
+		StringBuilder sb = new StringBuilder();
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(inFromClient));
+		String line;
+		while ((line = br.readLine()) != null && !"done".equals(line))
+			sb.append(line).append('\n');
+
+		return sb.toString();
+	}
+
+
+
+	/**
+	 * Solve and returns the specified problem with the given solver.
+	 */
+	private <P> String solve(Solver<P> solver, String problem) throws IOException{
+		String solution = cm.load(problem);
+		if (solution != null)
+			return solution;
+
+		P solverProblem = solver.createProblem(problem);
+
+		solution = solver.solve(solverProblem);
+		if (solution != null)
+			cm.save(problem, solution);
+
+		return solution;
+	}
+
+
+
+	/**
+	 * Send the specified solution to the client.
+	 */
+	private void sendSolution(String solution, OutputStream os) throws IOException{
+		BufferedOutputStream bos = new BufferedOutputStream(os);
+
+		bos.write(solution.getBytes());
+		bos.flush();
 	}
 
 
