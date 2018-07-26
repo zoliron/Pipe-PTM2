@@ -2,8 +2,11 @@ package com.zoliron.server;
 
 import com.zoliron.client.ClientHandler;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 
 
 
@@ -72,24 +75,31 @@ public class MyServer implements Server{
 	 * Run & listen on the server port.
 	 */
 	private void runServer() throws Exception{
-		ServerSocket listener = new ServerSocket(port);
+		ServerSocket server = new ServerSocket(port);
+		server.setSoTimeout(1000);
 
 		System.out.println("Waiting for clients on port: " + port);
 		while (!stop){
 			try{
-				Socket socket = listener.accept();
+				Socket socket = server.accept();
+				try{
+					InputStream inFromClient = socket.getInputStream();
+					OutputStream outToClient = socket.getOutputStream();
+					clientHandler.handleClient(inFromClient, outToClient);
 
-				clientHandler.handleClient(socket.getInputStream(), socket.getOutputStream());
+					inFromClient.close();
+					outToClient.close();
+					socket.close();
+				} catch (Exception e){
+					e.printStackTrace();
+				}
 
-//				socket.getInputStream().close();
-//				socket.getOutputStream().close();
-				socket.close();
-			} catch (Exception e){
+			} catch (SocketTimeoutException e){
 				e.printStackTrace();
 			}
 		}
 
-		listener.close();
+		server.close();
 	}
 
 
