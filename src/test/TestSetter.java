@@ -18,7 +18,6 @@ import com.zoliron.utils.MathUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 
 
@@ -95,7 +94,7 @@ public class TestSetter{
 
 			@Override
 			public boolean isGoal(SearcherNode<Grid> node){
-				return Objects.equals(m.getExit(), node.getState());
+				return m.getExit().equals(node.getState());
 			}
 
 
