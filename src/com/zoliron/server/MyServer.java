@@ -97,7 +97,7 @@ public class MyServer implements Server{
 				}
 
 			} catch (SocketTimeoutException e){
-				e.printStackTrace();
+//				e.printStackTrace();
 			}
 		}
 

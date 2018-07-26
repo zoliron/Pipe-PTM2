@@ -5,7 +5,6 @@ import com.zoliron.searcher.SearcherNode;
 import com.zoliron.utils.MathUtils;
 
 import java.util.List;
-import java.util.Objects;
 
 import test.Maze;
 
@@ -45,7 +44,7 @@ public class MazeSearchable implements Searchable<MazeSearchableState>{
 
 	@Override
 	public boolean isGoal(SearcherNode<MazeSearchableState> node){
-		return Objects.equals(initial.getExit(), node.getState().getPoint());
+		return initial.getExit().equals(node.getState().getPoint());
 	}
 
 
