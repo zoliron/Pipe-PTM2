@@ -17,6 +17,7 @@ import com.zoliron.solver.Solver;
 import com.zoliron.utils.MathUtils;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -101,7 +102,26 @@ public class TestSetter{
 
 			@Override
 			public List<Grid> getAllPossibleStates(Grid state){
-				return m.getPossibleMoves(state);
+				List<Grid> states = m.getPossibleMoves(state);
+
+				// Workaround for lecturer bugs.
+				int row = state.row;
+				int col = state.col;
+
+				// Remove the cross-line grids.
+				Iterator<Grid> it = states.iterator();
+				while (it.hasNext()){
+					Grid s = it.next();
+					if (Math.abs(row - s.row) + Math.abs(col - s.col) != 1)
+						it.remove();
+				}
+
+				// Add the goal.
+				Grid g = m.getExit();
+				if (Math.abs(row - g.row) + Math.abs(col - g.col) == 1)
+					states.add(g);
+
+				return states;
 			}
 
 
