@@ -1,4 +1,4 @@
-package com.zoliron.games.maze.model;
+package test;
 
 import java.util.ArrayList;
 import java.util.List;

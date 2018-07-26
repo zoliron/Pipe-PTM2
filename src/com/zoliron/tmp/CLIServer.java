@@ -14,7 +14,7 @@ public class CLIServer{
 
 
 	public static void main(String[] args) throws Exception{
-		Server server = new MyServer();
+		Server server = new MyServer(6400);
 		server.start(new MyClientHandler());
 	}
 

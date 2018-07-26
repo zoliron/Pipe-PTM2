@@ -1,4 +1,4 @@
-package com.zoliron.games.maze.model;
+package test;
 
 // a position class for row, col
 public class Grid{

@@ -17,6 +17,13 @@ public class MyServer implements Server{
 
 
 	/**
+	 * The server port.
+	 */
+	private final int port;
+
+
+
+	/**
 	 * The {@link ClientHandler}.
 	 */
 	private ClientHandler clientHandler;
@@ -30,12 +37,25 @@ public class MyServer implements Server{
 
 
 
+	/**
+	 * Creates new {@link MyServer} with the specified port.
+	 */
+	public MyServer(int port){
+		this.port = port;
+	}
+
+
+
 	@Override
-	public void start(ClientHandler clientHandler) throws Exception{
+	public void start(ClientHandler clientHandler){
 		this.clientHandler = clientHandler;
 		this.stop = false;
 
-		runServer();
+		try{
+			runServer();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
 
@@ -52,9 +72,9 @@ public class MyServer implements Server{
 	 * Run & listen on the server port.
 	 */
 	private void runServer() throws Exception{
-		ServerSocket listener = new ServerSocket(6400);
+		ServerSocket listener = new ServerSocket(port);
 
-		System.out.println("Waiting for clients on port 6400");
+		System.out.println("Waiting for clients on port: " + port);
 		while (!stop){
 			try{
 				Socket socket = listener.accept();
@@ -63,7 +83,7 @@ public class MyServer implements Server{
 
 //				socket.getInputStream().close();
 //				socket.getOutputStream().close();
-//				socket.close();
+				socket.close();
 			} catch (Exception e){
 				e.printStackTrace();
 			}

@@ -18,7 +18,7 @@ public interface Server{
 	/**
 	 * Starts the server with the specified {@link ClientHandler}.
 	 */
-	void start(ClientHandler clientHandler) throws Exception;
+	void start(ClientHandler clientHandler);
 
 
 

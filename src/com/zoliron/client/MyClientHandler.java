@@ -3,6 +3,7 @@ package com.zoliron.client;
 import com.zoliron.cachemanager.CacheManager;
 import com.zoliron.cachemanager.FileCacheManager;
 import com.zoliron.games.pipe.PipeSolver;
+import com.zoliron.games.pipe.model.PipeBoard;
 import com.zoliron.solver.Solver;
 
 import java.io.*;
@@ -25,6 +26,13 @@ public class MyClientHandler implements ClientHandler{
 
 
 
+	/**
+	 * The solver.
+	 */
+	private final Solver<PipeBoard> solver = new PipeSolver();
+
+
+
 	@Override
 	public void handleClient(InputStream inFromClient, OutputStream outToClient){
 		try{
@@ -33,7 +41,7 @@ public class MyClientHandler implements ClientHandler{
 			System.out.println("Problem:");
 			System.out.println(problem);
 
-			String solution = solve(new PipeSolver(), problem);
+			String solution = solve(solver, problem);
 
 			System.out.println("Solution:");
 			System.out.println(solution);
