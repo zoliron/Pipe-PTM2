@@ -76,9 +76,9 @@ public class EightPuzzle implements Iterable<Point>{
 	 * Find the puzzle point for the specified tile.
 	 */
 	public Point getPoint(String tile){
-		for (int x = 0; x < COLUMN_COUNT; x++){
-			for (int y = 0; y < ROW_COUNT; y++){
-				if (tile.equals(board[x][y]))
+		for (int y = 0; y < ROW_COUNT; y++){
+			for (int x = 0; x < COLUMN_COUNT; x++){
+				if (tile.equals(board[y][x]))
 					return new Point(x, y);
 			}
 		}
@@ -100,18 +100,18 @@ public class EightPuzzle implements Iterable<Point>{
 	/**
 	 * Resolve the point we need to perform the action upon.
 	 */
-	public Point getPointForAction(Point empty, Action action){
-		switch (action){
-			case TOP:
+	public Point getPointForAction(Point empty, PuzzleMove puzzleMove){
+		switch (puzzleMove){
+			case UP:
 				return new Point(empty.x, empty.y + 1);  // Move bottom point top.
-			case BOTTOM:
+			case DOWN:
 				return new Point(empty.x, empty.y - 1); // Move top point bottom.
 			case LEFT:
 				return new Point(empty.x + 1, empty.y);  // Move right point left.
 			case RIGHT:
 				return new Point(empty.x - 1, empty.y); // Move left point right.
 			default:
-				throw new IllegalStateException("Unknown action: " + action);
+				throw new IllegalStateException("Unknown action: " + puzzleMove);
 		}
 	}
 
@@ -121,9 +121,9 @@ public class EightPuzzle implements Iterable<Point>{
 	 * Swaps between the 2 points.
 	 */
 	public void swap(Point p1, Point p2){
-		String tmp = board[p1.x][p1.y];
-		board[p1.x][p1.y] = board[p2.x][p2.y];
-		board[p2.x][p2.y] = tmp;
+		String tmp = board[p1.y][p1.x];
+		board[p1.y][p1.x] = board[p2.y][p2.x];
+		board[p2.y][p2.x] = tmp;
 	}
 
 
@@ -134,9 +134,9 @@ public class EightPuzzle implements Iterable<Point>{
 	public EightPuzzle deepCopy(){
 		String[][] copy = new String[COLUMN_COUNT][ROW_COUNT];
 
-		for (int x = 0; x < COLUMN_COUNT; x++)
-			for (int y = 0; y < ROW_COUNT; y++)
-				copy[x][y] = board[x][y];
+		for (int y = 0; y < ROW_COUNT; y++)
+			for (int x = 0; x < COLUMN_COUNT; x++)
+				copy[y][x] = board[y][x];
 
 		return new EightPuzzle(copy);
 	}
@@ -146,9 +146,10 @@ public class EightPuzzle implements Iterable<Point>{
 	@Override
 	public String toString(){
 		StringBuilder sb = new StringBuilder(ROW_COUNT * COLUMN_COUNT);
-		for (int x = 0; x < COLUMN_COUNT; x++)
-			for (int y = 0; y < ROW_COUNT; y++)
-				sb.append(board[x][y]);
+
+		for (int y = 0; y < ROW_COUNT; y++)
+			for (int x = 0; x < COLUMN_COUNT; x++)
+				sb.append(board[y][x]);
 
 		return sb.toString();
 	}
@@ -181,11 +182,11 @@ public class EightPuzzle implements Iterable<Point>{
 
 
 	/**
-	 * The puzzle actions.
+	 * The puzzle movements.
 	 */
-	public enum Action{
+	public enum PuzzleMove{
 
-		LEFT, TOP, RIGHT, BOTTOM
+		LEFT, RIGHT, UP, DOWN
 
 	}
 

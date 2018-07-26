@@ -54,19 +54,19 @@ public class EightPuzzleSearchable implements Searchable<EightPuzzleState>{
 		Point emptyPoint = puzzle.getEmptyPoint();
 
 		List<EightPuzzleState> possibleStates = new ArrayList<>(4);
-		EightPuzzleState rightState = tryAction(puzzle, emptyPoint, EightPuzzle.Action.LEFT);
+		EightPuzzleState rightState = tryAction(puzzle, emptyPoint, EightPuzzle.PuzzleMove.LEFT);
 		if (rightState != null)
 			possibleStates.add(rightState);
 
-		EightPuzzleState bottomState = tryAction(puzzle, emptyPoint, EightPuzzle.Action.TOP);
+		EightPuzzleState bottomState = tryAction(puzzle, emptyPoint, EightPuzzle.PuzzleMove.UP);
 		if (bottomState != null)
 			possibleStates.add(bottomState);
 
-		EightPuzzleState leftState = tryAction(puzzle, emptyPoint, EightPuzzle.Action.RIGHT);
+		EightPuzzleState leftState = tryAction(puzzle, emptyPoint, EightPuzzle.PuzzleMove.RIGHT);
 		if (leftState != null)
 			possibleStates.add(leftState);
 
-		EightPuzzleState topState = tryAction(puzzle, emptyPoint, EightPuzzle.Action.BOTTOM);
+		EightPuzzleState topState = tryAction(puzzle, emptyPoint, EightPuzzle.PuzzleMove.DOWN);
 		if (topState != null)
 			possibleStates.add(topState);
 
@@ -102,15 +102,15 @@ public class EightPuzzleSearchable implements Searchable<EightPuzzleState>{
 	/**
 	 * Try to perform the specified action; Returns a new {@link EightPuzzleState} if succeeded or {@code null} otherwise.
 	 */
-	private static EightPuzzleState tryAction(EightPuzzle puzzle, Point emptyPoint, EightPuzzle.Action action){
-		Point neighbourPoint = puzzle.getPointForAction(emptyPoint, action);
+	private static EightPuzzleState tryAction(EightPuzzle puzzle, Point emptyPoint, EightPuzzle.PuzzleMove puzzleMove){
+		Point neighbourPoint = puzzle.getPointForAction(emptyPoint, puzzleMove);
 		if (!puzzle.isValidPoint(neighbourPoint))
 			return null;
 
 		EightPuzzle newPuzzle = puzzle.deepCopy();
 		newPuzzle.swap(emptyPoint, neighbourPoint);
 
-		return new EightPuzzleState(newPuzzle, neighbourPoint, action);
+		return new EightPuzzleState(newPuzzle, neighbourPoint, puzzleMove);
 
 	}
 

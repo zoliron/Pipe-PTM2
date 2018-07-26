@@ -36,7 +36,6 @@ public class BestFirstSearch<S> extends AbstractSearcher<S>{
 				throw new IllegalStateException("Open node does not in queue!");
 			closed.add(node.getState());
 
-
 //			System.out.println(node.getState());
 //			System.out.println("Score: " + node.getScore());
 //			System.out.println("Cost: " + node.getCost());

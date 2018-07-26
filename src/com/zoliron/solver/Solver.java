@@ -1,12 +1,30 @@
 package com.zoliron.solver;
 
-public interface Solver{
+import java.io.InputStream;
 
 
 
-	void solve();
+/**
+ * The solver interface.
+ *
+ * @author Ronen Zolicha
+ */
+public interface Solver<P>{
 
 
 
-	void createProblem();
+	/**
+	 * Creates the problem from the specified {@link InputStream}.
+	 */
+	P createProblem(String problem);
+
+
+
+	/**
+	 * Solve and return the problem solution.
+	 */
+	String solve(P problem);
+
+
+
 }

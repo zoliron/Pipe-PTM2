@@ -1,6 +1,8 @@
 package com.zoliron.searcher;
 
 import java.time.Duration;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -8,7 +10,7 @@ import java.util.List;
 /**
  * Encapsulate the {@link Searcher} solution.
  */
-public class Solution<S>{
+public class Solution<S> implements Iterable<S>{
 
 
 
@@ -44,7 +46,7 @@ public class Solution<S>{
 	 * Creates new {@link Solution} with the specified cost and states.
 	 */
 	Solution(List<S> states, double cost, int numOfIteration, Duration duration){
-		this.states = states;
+		this.states = Collections.unmodifiableList(states);
 		this.cost = cost;
 		this.numOfIteration = numOfIteration;
 		this.duration = duration;
@@ -98,6 +100,13 @@ public class Solution<S>{
 
 
 	@Override
+	public Iterator<S> iterator(){
+		return states.iterator();
+	}
+
+
+
+	@Override
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 
@@ -108,7 +117,5 @@ public class Solution<S>{
 
 		return sb.toString();
 	}
-
-
 
 }

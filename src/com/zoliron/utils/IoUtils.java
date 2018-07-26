@@ -1,9 +1,8 @@
 package com.zoliron.utils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -13,6 +12,22 @@ import java.io.OutputStream;
  * @author Ronen Zolicha
  */
 public class IoUtils{
+
+
+
+	/**
+	 * Read the specified {@link InputStream} to {@link String} lines.
+	 */
+	public static List<String> readAsStringLines(InputStream is) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		List<String> lines = new ArrayList<>();
+
+		String line;
+		while ((line = br.readLine()) != null)
+			lines.add(line);
+
+		return lines;
+	}
 
 
 
@@ -38,6 +53,15 @@ public class IoUtils{
 		pump(is, os);
 
 		return os.toByteArray();
+	}
+
+
+
+	/**
+	 * Returns a {@link InputStream} of the specified data string.
+	 */
+	public static InputStream toInputStream(String data){
+		return new ByteArrayInputStream(data.getBytes());
 	}
 
 
