@@ -102,6 +102,7 @@ public class MyServer implements Server{
 		}
 
 		server.close();
+		System.out.println("Server closed!");
 	}
 
 
