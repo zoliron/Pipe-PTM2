@@ -73,10 +73,14 @@ public class PipeSolver implements Solver<PipeBoard>{
 		StringBuilder sb = new StringBuilder();
 		for (int row = 0; row < rowCount; row++){
 			for (int column = 0; column < columnCount; column++){
-				if (sb.length() > 0)
+				int clicksCount = clickCount[row][column];
+				if (clicksCount <= 0)
+					continue;
+
+				if (sb.length() > 0) // Add line
 					sb.append('\n');
 
-				sb.append(row).append(',').append(column).append(',').append(clickCount[row][column]);
+				sb.append(row).append(',').append(column).append(',').append(clicksCount);
 			}
 		}
 

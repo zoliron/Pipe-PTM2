@@ -54,11 +54,13 @@ public class MyServer implements Server{
 		this.clientHandler = clientHandler;
 		this.stop = false;
 
-		try{
-			runServer();
-		} catch (Exception e){
-			e.printStackTrace();
-		}
+		new Thread(() -> {
+			try{
+				runServer();
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+		}).start();
 	}
 
 
