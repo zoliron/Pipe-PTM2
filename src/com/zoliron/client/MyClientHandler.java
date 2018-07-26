@@ -95,8 +95,11 @@ public class MyClientHandler implements ClientHandler{
 	private void sendSolution(String solution, OutputStream os) throws IOException{
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
 
-		bw.write(solution);
-		bw.newLine();
+		if (solution != null && !solution.isEmpty()){
+			bw.write(solution);
+			bw.newLine();
+		}
+
 		bw.write("done");
 		bw.flush();
 	}

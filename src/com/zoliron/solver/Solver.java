@@ -14,6 +14,13 @@ public interface Solver<P>{
 
 
 	/**
+	 * A solution result which represent a problem without any solution.
+	 */
+	public static final String NO_SOLUTION = "";
+
+
+
+	/**
 	 * Creates the problem from the specified {@link InputStream}.
 	 */
 	P createProblem(String problem);

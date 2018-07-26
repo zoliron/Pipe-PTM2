@@ -19,6 +19,8 @@ import com.zoliron.utils.MathUtils;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 
@@ -84,69 +86,77 @@ public class TestSetter{
 	 *
 	 */
 	public static List<String> solveMaze(Maze m){
-		Searchable<Grid> searchable = new Searchable<Grid>(){
+//		Option 1
+//		Searchable<Grid> searchable = new Searchable<Grid>(){
+//
+//			@Override
+//			public Grid getInitialState(){
+//				return m.getEntrance();
+//			}
+//
+//
+//
+//			@Override
+//			public boolean isGoal(SearcherNode<Grid> node){
+//				return m.getExit().equals(node.getState());
+//			}
+//
+//
+//
+//			@Override
+//			public List<Grid> getAllPossibleStates(Grid state){
+//				List<Grid> states = m.getPossibleMoves(state);
+//
+//				// Workaround for lecturer bugs.
+//				int row = state.row;
+//				int col = state.col;
+//
+//				// Remove the cross-line grids.
+//				Iterator<Grid> it = states.iterator();
+//				while (it.hasNext()){
+//					Grid s = it.next();
+//					if (Math.abs(row - s.row) + Math.abs(col - s.col) != 1)
+//						it.remove();
+//				}
+//
+//				// Add the goal.
+//				Grid g = m.getExit();
+//				if (Math.abs(row - g.row) + Math.abs(col - g.col) == 1)
+//					states.add(g);
+//
+//				return states;
+//			}
+//
+//
+//
+//			@Override
+//			public double calculateCost(Grid fromState, Grid toState){
+//				return 1d;
+//			}
+//
+//
+//
+//			@Override
+//			public double calculateEstimation(Grid state){
+//				int x1 = state.col;
+//				int y1 = state.row;
+//				int x2 = m.getExit().col;
+//				int y2 = m.getExit().row;
+//
+//				return MathUtils.manhattanDistance(x1, y1, x2, y2);
+//			}
+//
+//		};
+//
+//		Solution<Grid> solution = new BestFirstSearch<Grid>().search(searchable);
+//		List<Grid> moves = solution.getStates();
 
-			@Override
-			public Grid getInitialState(){
-				return m.getEntrance();
-			}
-
-
-
-			@Override
-			public boolean isGoal(SearcherNode<Grid> node){
-				return m.getExit().equals(node.getState());
-			}
-
-
-
-			@Override
-			public List<Grid> getAllPossibleStates(Grid state){
-				List<Grid> states = m.getPossibleMoves(state);
-
-				// Workaround for lecturer bugs.
-				int row = state.row;
-				int col = state.col;
-
-				// Remove the cross-line grids.
-				Iterator<Grid> it = states.iterator();
-				while (it.hasNext()){
-					Grid s = it.next();
-					if (Math.abs(row - s.row) + Math.abs(col - s.col) != 1)
-						it.remove();
-				}
-
-				// Add the goal.
-				Grid g = m.getExit();
-				if (Math.abs(row - g.row) + Math.abs(col - g.col) == 1)
-					states.add(g);
-
-				return states;
-			}
-
-
-
-			@Override
-			public double calculateCost(Grid fromState, Grid toState){
-				return 1d;
-			}
-
-
-
-			@Override
-			public double calculateEstimation(Grid state){
-				int x1 = state.col;
-				int y1 = state.row;
-				int x2 = m.getExit().col;
-				int y2 = m.getExit().row;
-
-				return MathUtils.manhattanDistance(x1, y1, x2, y2);
-			}
-
-		};
-
-		Solution<Grid> solution = new BestFirstSearch<Grid>().search(searchable);
-		List<Grid> moves = solution.getStates();
+//		Option 2
+		MazeSearchable mazeSearchable = new MazeSearchable(m);
+		Solution<MazeSearchableState> solution = new BestFirstSearch<MazeSearchableState>().search(mazeSearchable);
+		List<Grid> moves = solution.getStates().stream()
+				.map(s -> s.point)
+				.collect(Collectors.toList());
 
 		List<String> result = new ArrayList<>();
 		int size = moves.size();
@@ -167,6 +177,161 @@ public class TestSetter{
 		}
 
 		return result;
+	}
+
+
+
+	/**
+	 * The maze searchable.
+	 *
+	 * Option 2
+	 */
+	private static class MazeSearchable implements Searchable<MazeSearchableState>{
+
+
+
+		/**
+		 * The initial maze.
+		 */
+		private final Maze initial;
+
+
+
+		/**
+		 * Creates new {@link MazeSearchable} with the initial maze.
+		 */
+		public MazeSearchable(Maze initial){
+			this.initial = initial;
+		}
+
+
+
+		@Override
+		public MazeSearchableState getInitialState(){
+			return new MazeSearchableState(initial.getEntrance());
+		}
+
+
+
+		@Override
+		public boolean isGoal(SearcherNode<MazeSearchableState> node){
+			MazeSearchableState exit = new MazeSearchableState(initial.getExit());
+
+			return exit.equals(node.getState());
+		}
+
+
+
+		@Override
+		public List<MazeSearchableState> getAllPossibleStates(MazeSearchableState state){
+			List<Grid> states = initial.getPossibleMoves(state.point);
+
+			// Workaround for lecturer bugs.
+			int row = state.point.row;
+			int col = state.point.col;
+
+			// Remove the cross-line grids.
+			Iterator<Grid> it = states.iterator();
+			while (it.hasNext()){
+				Grid s = it.next();
+				if (Math.abs(row - s.row) + Math.abs(col - s.col) != 1)
+					it.remove();
+			}
+
+			// Add the goal.
+			Grid g = initial.getExit();
+			if (Math.abs(row - g.row) + Math.abs(col - g.col) == 1)
+				states.add(g);
+
+			return states.stream()
+					.map(MazeSearchableState::new)
+					.collect(Collectors.toList());
+		}
+
+
+
+		@Override
+		public double calculateCost(MazeSearchableState fromState, MazeSearchableState toState){
+			return 1d;
+		}
+
+
+
+		@Override
+		public double calculateEstimation(MazeSearchableState state){
+			int x1 = state.getPoint().col;
+			int y1 = state.getPoint().row;
+			int x2 = initial.getExit().col;
+			int y2 = initial.getExit().row;
+
+			return MathUtils.manhattanDistance(x1, y1, x2, y2);
+		}
+
+
+
+	}
+
+
+
+	/**
+	 * The maze searchable state.
+	 *
+	 * Option 2
+	 */
+	private static class MazeSearchableState{
+
+
+
+		/**
+		 * The state point moved.
+		 */
+		private final Grid point;
+
+
+
+		/**
+		 * Creates new {@link MazeSearchableState} with the specified parameters.
+		 */
+		public MazeSearchableState(Grid point){
+			this.point = point;
+		}
+
+
+
+		/**
+		 * Returns the state maze point moved.
+		 */
+		public Grid getPoint(){
+			return point;
+		}
+
+
+
+		@Override
+		public String toString(){
+			return "Point " + point;
+		}
+
+
+
+		@Override
+		public int hashCode(){
+			return Objects.hash(point.col, point.row);
+		}
+
+
+
+		@Override
+		public boolean equals(Object obj){
+			if (!(obj instanceof MazeSearchableState))
+				return false;
+
+			MazeSearchableState other = (MazeSearchableState)obj;
+			return point.col == other.point.col && point.row == other.point.row;
+		}
+
+
+
 	}
 
 
