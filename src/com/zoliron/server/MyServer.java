@@ -80,7 +80,7 @@ public class MyServer implements Server{
 		ServerSocket server = new ServerSocket(port);
 		server.setSoTimeout(1000);
 
-		System.out.println("Waiting for clients on port: " + port);
+//		System.out.println("Waiting for clients on port: " + port);
 		while (!stop){
 			try{
 				Socket socket = server.accept();
@@ -102,7 +102,7 @@ public class MyServer implements Server{
 		}
 
 		server.close();
-		System.out.println("Server closed!");
+//		System.out.println("Server closed!");
 	}
 
 
