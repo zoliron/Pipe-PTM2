@@ -10,18 +10,18 @@ public class MainTrain {
 		//----------- Question 1 --------------
 		// design test (40 points)
 		DesignTest dt=new DesignTest();
-		TestSetter.setClasses(dt);
+		TestSetter2.setClasses(dt);
 		dt.testDesign();
 		
 		//----------- Question 2 --------------
 		// execution test (40 points)
 		Random r=new Random();
 		int port=6000+r.nextInt(1000);
-		TestSetter.runServer(port);
+		TestSetter2.runServer(port);
 		try{
 			TestServer.runClient(port);
 		}finally{
-			TestSetter.stopServer();
+			TestSetter2.stopServer();
 		}
 		
 		//----------- Question 3 --------------		
@@ -36,7 +36,7 @@ public class MainTrain {
 		};
 		
 		Maze m=new Maze(mazeData);		
-		List<String> actions = TestSetter.solveMaze(m);
+		List<String> actions = TestSetter2.solveMaze(m);
 		
 		// the following is the solution for the maze above:
 		//List<String> answer = Arrays.asList("RIGHT","RIGHT","RIGHT","DOWN","DOWN","LEFT","LEFT","DOWN","DOWN");
