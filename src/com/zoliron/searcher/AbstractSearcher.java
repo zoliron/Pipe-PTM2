@@ -71,8 +71,9 @@ public abstract class AbstractSearcher<S> implements Searcher<S>{
 	 */
 	private SearcherNode<S> toNode(Searchable<S> searchable, SearcherNode<S> previousNode, S toState){
 		S previousState = (previousNode != null) ? previousNode.getState() : null;
-
-		double cost = searchable.calculateCost(previousState, toState);
+		double cost = (previousState != null)
+				? searchable.calculateCost(previousState, toState)
+				: 0d;
 		double accumulatedCost = (previousNode != null) ? previousNode.getCost() + cost : cost;
 		double estimation = searchable.calculateEstimation(toState);
 
