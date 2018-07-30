@@ -74,7 +74,10 @@ public class BestFirstSearch<S> extends AbstractSearcher<S>{
 	 * returns {@code true}.
 	 */
 	private boolean isBetterThan(SearcherNode<S> n1, SearcherNode<S> n2){
-		return n1.equals(n2) && (n1.getCost() < n2.getCost());
+		return (n1 != null)
+				&& (n2 != null)
+				&& Objects.equals(n1.getState(), n2.getState())
+				&& (n1.getCost() < n2.getCost());
 	}
 
 
