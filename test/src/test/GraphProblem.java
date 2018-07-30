@@ -142,7 +142,7 @@ public class GraphProblem{
 
 			Iterable<GraphEdge<String, Double>> edges = graph.edgesOf(state.vertex);
 			for (GraphEdge<String, Double> edge : edges){
-				if (edge.getVertex1().equals(state.vertex))
+				if (edge.getVertex1().equals(state.vertex)) // Outgoing edge.
 					result.add(new GraphSearchableState(edge.getVertex2()));
 			}
 
@@ -155,7 +155,7 @@ public class GraphProblem{
 		public double calculateCost(GraphSearchableState fromState, GraphSearchableState toState){
 			Iterable<GraphEdge<String, Double>> fromEdges = graph.edgesOf(fromState.vertex);
 			for (GraphEdge<String, Double> fromEdge : fromEdges){
-				if (fromEdge.getVertex2().equals(toState.vertex)){
+				if (fromEdge.getVertex2().equals(toState.vertex)){  // Incoming edge.
 					return fromEdge.getEdgeValue();
 				}
 			}
