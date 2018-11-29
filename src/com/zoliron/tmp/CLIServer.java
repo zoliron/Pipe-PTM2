@@ -11,10 +11,8 @@ import com.zoliron.server.Server;
  */
 public class CLIServer{
 
-
-
 	public static void main(String[] args) throws Exception{
-		Server server = new MyServer(6400);
+		Server server = new MyServer(6400, 5);
 		server.start(new MyClientHandler());
 	}
 
